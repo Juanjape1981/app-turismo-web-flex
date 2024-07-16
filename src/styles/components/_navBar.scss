@@ -1,0 +1,118 @@
+.navbar {
+    background-color: var(--black-color);
+    width: 100%;
+    display: flex;
+    box-shadow: 2px 2px 2px 0px rgba(186,171,186,1);
+    // flex-wrap: wrap;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+    justify-content: space-between;
+    @media (max-width: 500px) {
+      flex-direction: column;
+    }
+  }
+  .divLogo{
+    display: flex;
+    flex-direction: row;
+    width: 20%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    padding-left: 2%;
+    img{
+      width: 50%;
+      &:hover {
+        cursor: pointer;
+    }
+    }
+    @media (max-width: 500px) {
+      width: 50%;
+    }
+    &:hover {
+    cursor: pointer;
+}
+  }
+  .navbar-list {
+    font-family: var(--font-robotoFlex);
+    width: 80%;
+    color: #fff;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    li{
+      // margin-left: 30px;
+      padding-right: 10px;
+      margin-right: 100px;
+      @media (max-width: 500px) {
+        margin-left: 0px;
+      }
+          }
+          @media (max-width: 500px) {
+            margin-left: 10px;
+            width: 100%;
+            justify-content: space-around;
+          }
+          
+        }
+        
+        .navbar-item { 
+          display: inline-block;
+          margin-right: 10px;
+          color: #fff;
+          
+        }
+        
+        .navbar-item a:hover {
+          background-color: red;
+  }
+  .route{
+    color: #fff;
+    font-size: 1.3rem;
+    &:hover {
+      color: var(--primary-color);
+      text-shadow: 0.5px 0.5px 1px var(--primary-color);
+      cursor: pointer;
+  }
+  }
+  .userName{
+    color: #fff;
+    font-size: 1rem;
+    &:hover {
+      color: var(--primary-color);
+      text-shadow: 0.5px 0.5px 2px var(--primary-color);
+      cursor: pointer;
+  }
+  }
+  .divUser{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 60px;
+    justify-content: space-between;
+  }
+  .imageUser{
+    color: #ffff;
+    border-radius: 50px;
+    height: 60px;
+    width: 60px;
+    @media (max-width: 500px) {
+      margin-left: 5px;
+    }
+  }
+  .logOut{
+    margin-right: 20px;
+    &:hover{
+      color: var(--primary-color);
+      cursor: pointer;
+    }
+    // width: 18px;
+    // height: 18px;
+    // background-size: cover;
+  }
+  
+  
+  
+  

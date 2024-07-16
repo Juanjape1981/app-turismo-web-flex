@@ -1,0 +1,18 @@
+.layout{
+    display: flex;
+    flex-direction: row;
+    // width: 100%;
+    // height: 100vh;
+    // overflow-y: auto;
+}
+.Container_layout{
+    overflow-y: auto;
+    display: flex;flex-direction: column;
+    // height: 100vh;
+    width: 100vw;
+}
+
+.childrenLayout{
+    min-width: 100vw;
+    min-height: 100vh;
+}

@@ -1,0 +1,139 @@
+.register-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f4f4f4;
+  width: 100%;
+}
+
+.content {
+  background-color: #fff;
+  padding: 2rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  min-height: 90%;
+  max-width: 80%;
+  width: 100%;
+}
+
+.form-container {
+  width: 100%;
+
+  h3 {
+    color: rgb(66, 66, 66);
+    margin-bottom: 20px;
+  }
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+
+  p {
+    font-size: 10px;
+    color: #333;
+  }
+
+  .form-grid {
+    width: 90%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+
+    .form-input {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+  }
+
+  .password-divider {
+    display: flex;
+    flex-direction: column;
+    margin-top: 0.5rem;
+
+    .form-input {
+      width: 100%;
+      margin-bottom: 1rem;
+      padding: 0.75rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+  }
+
+  .form-checkbox {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+
+    input {
+      margin-right: 0.5rem;
+    }
+  }
+
+  .form-error {
+    color: red;
+    font-size: 0.875rem;
+    margin-bottom: 1rem;
+    grid-column: span 2; // Hacer que el error ocupe dos columnas
+  }
+
+  .submit-button {
+    padding: 0.75rem;
+    border: none;
+    background-color: var(--black-color);
+    color: #fff;
+    cursor: pointer;
+    border-radius: 4px;
+    grid-column: span 2; // Hacer que el botón ocupe dos columnas
+    &:hover{
+      color: var(--primary-color);
+    }
+    &:disabled {
+      background-color: #999;
+    }
+  }
+
+  .already-account-button {
+    margin-top: 1rem;
+    color: #333;
+    text-align: center;
+    text-decoration: none;
+    grid-column: span 2; // Hacer que el enlace ocupe dos columnas
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+.divLogoReg{
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  // height: 60%;
+}
+.divLogoReg2{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 20%;
+  margin-bottom: 2%;
+}
+.logoregister{
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      margin-bottom: 15%;
+      & img{
+        width: 5%;
+      }
+}
+.logoregister2{
+      display: flex;
+      justify-content: center;
+      margin-bottom: 15%;
+      & img{
+        max-width: 5%;
+      }
+}
