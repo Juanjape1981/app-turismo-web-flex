@@ -69,6 +69,16 @@ export const routes: RouteProps[] = [
         layout: lazy(async () => await import("../pages/Layout/layout"))
     },
     {
+        path: "/reset_password",
+        element: lazy(async () => await import("../pages/PasswordReset")),
+        name: "PasswordReset"
+    },
+    {
+        path: "/open_app_instruction",
+        element: lazy(async () => await import("../pages/OpenAppMessage")),
+        name: "EnConstruccion"
+    },
+    {
         path: "/profile",
         element: lazy(async () => await import("../pages/UserProfile")),
         name: "UserProfile",

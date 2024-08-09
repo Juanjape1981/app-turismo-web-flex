@@ -11,7 +11,7 @@ interface CustomJwtPayload extends JwtPayload {
   email: string;
   exp: number;
 }
-
+const URL = import.meta.env.VITE_API_URL;
 //Post para login de user
 const userLogIn = (user: UserLogin | null, token: string) => {
   return async (dispatch: Dispatch) => {
@@ -42,7 +42,7 @@ const userLogIn = (user: UserLogin | null, token: string) => {
       return res;
     } else if (user && !token.length) {
       try {
-        const URL = import.meta.env.VITE_API_URL;
+        
         const response = await axios.post(`${URL}/login`, user);
         const decodedToken: CustomJwtPayload = await jwtDecode(response.data.token);
 
@@ -91,7 +91,20 @@ const logOutUser = () => {
     }
   };
 };
-
+const resetPassword = (data: { email: string; code: string; password: string }) => {
+  return async (dispatch: Dispatch) => {
+      try {
+        console.log(dispatch);
+        
+          const response = await axios.put(`${URL}/reset_password/new_password`, data);
+          // Handle successful response
+          return response.data;
+      } catch (error: any) {
+          // Handle error
+          throw new Error(error.response?.data?.message || 'An error occurred');
+      }
+  };
+};
 export {
-  userLogIn, logOutUser
+  userLogIn, logOutUser,resetPassword
 };
