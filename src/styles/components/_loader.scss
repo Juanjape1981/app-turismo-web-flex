@@ -1,9 +1,11 @@
 .loader-wrapper {
+    position: absolute;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh; 
-    background-color: rgba(92, 92, 92, 0.233);
+    min-height: 100vh; 
+    width: 100vw;
+    background-color: rgba(92, 92, 92, 0.379);
     z-index: 10;
 }
 

@@ -7,6 +7,8 @@ import { useAppDispatch } from "../redux/store/hooks";
 import { userLogIn } from "../redux/actions/userActions";
 import logo from "../assets/logo.png";
 import logo2 from "../assets/logo2.png";
+import { useState } from "react";
+import Loader from "../components/Loader/Loader";
 
 const Login = () => {
   const {
@@ -16,6 +18,7 @@ const Login = () => {
   } = useForm();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
   const Toast = Swal.mixin({
     toast: true,
@@ -32,8 +35,9 @@ const Login = () => {
   });
 
   const onSubmit = (data: any) => {
+    setLoading(true);
     dispatch(userLogIn(data, "")).then((resp) => {
-        console.log(resp);
+      setLoading(false);
         
       if (resp) {
         Cookies.set("data", JSON.stringify(resp?.payload.token), { expires: 3 });
@@ -59,6 +63,7 @@ const Login = () => {
 
   return (
     <div className="login-container">
+      {loading && <Loader />}
       <div className="content">
         <div className="form-container">
           <div className="logo">
