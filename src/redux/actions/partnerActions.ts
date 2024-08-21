@@ -8,7 +8,7 @@ const URL = import.meta.env.VITE_API_URL;
 
 // Crear un nuevo partner
 const createPartner = (partnerData:PartnerCreate) => {
-  return async (dispatch: Dispatch) => {
+  return async () => {
     try {
       const response = await axios.post(`${URL}/partners`, partnerData);
       // dispatch(setPartnerData(response.data));

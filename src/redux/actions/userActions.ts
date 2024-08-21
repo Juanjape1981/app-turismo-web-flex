@@ -171,7 +171,7 @@ const fetchStatuses = () => async (dispatch: Dispatch, getState: () => RootState
         Authorization: `Bearer ${accessToken}`
       }
     });
-    console.log("respuesta de estados en action", response);
+    console.log("respuesta de estados en", response);
       
     dispatch(setStatuses(response.data));
   } catch (error) {
@@ -180,44 +180,34 @@ const fetchStatuses = () => async (dispatch: Dispatch, getState: () => RootState
 };
 const updateUser = (userData: any) => {
   return async (dispatch: Dispatch, getState: () => RootState) => {
-    const { accessToken } = getState().user; // Obtener el token del estado global
-console.log("userdata en la action", userData);
-console.log("Token en la action", accessToken);
+    const { accessToken } = getState().user;
     try {
       const response = await axios.put(`${URL}/user/${userData.user_id}`, userData.data, {
         headers: {
           Authorization: `Bearer ${accessToken}`
         }
       });
-      // console.log(response);
-      return response
-      // fetchAllUsers()
+      dispatch({ type: 'UPDATE_USER_SUCCESS', payload: response.data });
+      return response;
     } catch (error) {
       console.error("Error updating user:", error);
-      // Manejo de errores
     }
   };
 };
 
-// Acción para asignar un rol a un usuario
 const assignRoleToUser = (data: { role_ids: number[]; user_id: number; }) => {
   return async (dispatch: Dispatch, getState: () => RootState) => {
     const { accessToken } = getState().user;
-    console.log(accessToken);
-    
     try {
       const response = await axios.post(`${URL}/assign_roles_to_user`, data, {
         headers: {
-          Authorization: `Bearer ${accessToken}` // Agregar el token en el header
+          Authorization: `Bearer ${accessToken}`
         }
       });
-      // console.log(response);
-      return response
-      // Dispatch de la acción para manejar la asignación de roles en el estado
-      // dispatch(assignRoleSuccess(response.data));
+      dispatch({ type: 'ASSIGN_ROLE_SUCCESS', payload: response.data });
+      return response;
     } catch (error) {
       console.error("Error assigning role to user:", error);
-      // Manejo de errores
     }
   };
 };
