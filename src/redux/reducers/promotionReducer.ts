@@ -31,16 +31,16 @@ const promotionSlice = createSlice({
             state.branchPromotions.push(action.payload);
         },
         updatePromotion: (state, action: PayloadAction<Promotion>) => {
-            const indexAll = state.allPromotions.findIndex(promo => promo.id === action.payload.id);
+            const indexAll = state.allPromotions.findIndex(promo => promo.promotion_id === action.payload.promotion_id);
             if (indexAll >= 0) state.allPromotions[indexAll] = action.payload;
 
-            const indexBranch = state.branchPromotions.findIndex(promo => promo.id === action.payload.id);
+            const indexBranch = state.branchPromotions.findIndex(promo => promo.promotion_id === action.payload.promotion_id);
             if (indexBranch >= 0) state.branchPromotions[indexBranch] = action.payload;
         },
         deletePromotion: (state, action: PayloadAction<number>) => {
-            state.allPromotions = state.allPromotions.filter(promo => promo.id !== action.payload);
-            state.branchPromotions = state.branchPromotions.filter(promo => promo.id !== action.payload);
-            if (state.selectedPromotion?.id === action.payload) state.selectedPromotion = null;
+            state.allPromotions = state.allPromotions.filter(promo => promo.promotion_id !== action.payload);
+            state.branchPromotions = state.branchPromotions.filter(promo => promo.promotion_id !== action.payload);
+            if (state.selectedPromotion?.promotion_id === action.payload) state.selectedPromotion = null;
         },
     }
 });
