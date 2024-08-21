@@ -1,6 +1,7 @@
 import { Outlet, Route } from "react-router-dom";
 import { Fragment, LazyExoticComponent, Suspense, lazy } from "react";
 import AuthGuard from "../utils/Auth";
+import Loader from "../components/Loader/Loader";
 
 interface RouteProps {
     path?: string;
@@ -24,7 +25,7 @@ export const renderRoutes = (routes: RouteProps[]) => {
                 key={index}
                 path={route.path}
                 element={
-                    <Suspense fallback={<h1>Loading...</h1>}>
+                    <Suspense fallback={<Loader />}>
                         {route.authorization ? (
                             <AuthGuard allowedRoles={allowedRoles}>
                                 <LayoutComponent>
