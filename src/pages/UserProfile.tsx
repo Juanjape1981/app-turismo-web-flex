@@ -1,12 +1,12 @@
 import { useAppSelector } from '../redux/store/hooks';
 import { RootState } from '../redux/store/store';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import '../styles/pages/UserProfile.scss';
 
 const UserProfile = () => {
   const { userData } = useAppSelector((state: RootState) => state.user);
   const user = userData as any;
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 console.log(user);
 
   const handleEdit = () => {

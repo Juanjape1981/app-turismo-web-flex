@@ -74,8 +74,8 @@ const AllPromotions = () => {
     const handleCreateModalClose = () => {
         setIsCreateModal(false)
     };
-    const handleSave = (editedPromotion: PromotionUpdateModel) => {
-        console.log(editedPromotion);
+    const handleSave = (editedPromotion: PromotionUpdateModel, deletedImageIds: any) => {
+        console.log(editedPromotion, deletedImageIds);
 
         // Guardar la promoción editada
     };

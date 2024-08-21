@@ -26,8 +26,8 @@ const UserManagement = () => {
     const [countryFilter, setCountryFilter] = useState('');
     const [cityFilter, setCityFilter] = useState('');
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [loading, setLoading] = useState(true);
-    
+    // const [loading, setLoading] = useState(true);
+
     const openModal = () => setIsModalOpen(true);
     const closeModal = () => setIsModalOpen(false);
     useEffect(() => {

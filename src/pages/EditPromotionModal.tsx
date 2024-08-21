@@ -9,7 +9,7 @@ interface EditPromotionModalProps {
     isOpen: boolean;
     promotion: PromotionUpdateModel | null;
     onClose: () => void;
-    onSave: (editedPromotion: PromotionUpdateModel) => void;
+    onSave: (editedPromotion: PromotionUpdateModel, deletedImageIds: any) => void;
 }
 
 const EditPromotionModal: React.FC<EditPromotionModalProps> = ({ isOpen, promotion, onClose, onSave }) => {
@@ -94,7 +94,7 @@ const EditPromotionModal: React.FC<EditPromotionModalProps> = ({ isOpen, promoti
             };
             console.log("datos para actualizar la promoción",editedPromotion);
 
-            // onSave(editedPromotion, deletedImageIds);
+            onSave(editedPromotion, deletedImageIds);
             onClose(); // Cierra el modal
         }
     };
