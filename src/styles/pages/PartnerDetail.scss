@@ -1,0 +1,83 @@
+.partner-detail {
+    padding: 20px;
+    background-color: var(--tertiary-color);
+    font-family: var(--font-poppins);
+  
+    .MuiTypography-h4 {
+      font-size: 2rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+      color: var(--black-color);
+    }
+  
+    .MuiCard-root {
+      border-radius: var(--balloon-border-radius);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+      background-color: var(--white-color);
+      padding: 20px;
+  
+      .MuiAvatar-root {
+        width: 100px;
+        height: 100px;
+        margin-bottom: 10px;
+        border: 2px solid var(--blue-light-color);
+      }
+  
+      .MuiTypography-h6 {
+        font-size: 1.5rem;
+        color: var(--black-color);
+        font-weight: 500;
+      }
+  
+      .MuiTypography-body1,
+      .MuiTypography-body2 {
+        color: var(--black-color);
+        margin-bottom: 8px;
+      }
+  
+      .MuiButton-containedPrimary {
+        background-color: var(--primary-color);
+        color: #fff;
+        &:hover {
+          background-color: var(--primary-color);
+        }
+      }
+  
+      .MuiButton-outlinedPrimary {
+        border-color: var(--primary-color);
+        color: var(--primary-color);
+        &:hover {
+          background-color: rgba(var(--primary-color), 0.1);
+        }
+      }
+  
+      .MuiButton-outlinedSecondary {
+        border-color: var(--secundary-color);
+        color: var(--secundary-color);
+        &:hover {
+          background-color: rgba(var(--secundary-color), 0.1);
+        }
+      }
+  
+      .branch-card {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 15px;
+        margin-bottom: 10px;
+        cursor: pointer;
+        border: 1px solid var(--grey-color);
+        border-radius: var(--balloon-border-radius);
+        background-color: var(--white-color);
+  
+        .MuiButton {
+          margin-top: 10px;
+        }
+      }
+    }
+  
+    .MuiGrid-container {
+      margin-top: 20px;
+    }
+  }

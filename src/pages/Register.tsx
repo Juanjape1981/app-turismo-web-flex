@@ -74,7 +74,7 @@ const Register = () => {
     <div className="register-container">
       <div className="content">
         <div className="form-container">
-          <h3>Súmate a nuestra comunidad:</h3>
+          {/* <h3>Súmate a nuestra comunidad:</h3> */}
           <div className="divLogoReg">
             <Link className="divLogoReg2" to="/">
               <img className="logoregister" src={logo} alt="logoregister" />

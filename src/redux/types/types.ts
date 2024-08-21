@@ -18,3 +18,8 @@ export enum UserActionTypes {
     username: string;
     email: string;
   }
+  export default interface Status {
+    id: number;
+    name: string;
+    description: string;
+  }

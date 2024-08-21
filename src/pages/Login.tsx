@@ -101,7 +101,7 @@ const Login = () => {
               {errors.password && (
                 <span className="form-error"> {(errors.password as FieldError).message}</span>
               )}
-              <button type="submit" className="submit-button">Ingresar</button>
+              <button type="submit" className="submit_button">Ingresar</button>
               <Link to="/register" className="create-account-button">Crear cuenta</Link>
             </form>
           </div>

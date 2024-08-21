@@ -12,13 +12,18 @@ interface AuthGuardProps {
 const AuthGuard: React.FC<AuthGuardProps> = ({ children, allowedRoles }) => {
   const { userData, accessToken } = useAppSelector((state: RootState) => state.user);
   
+console.log("data del usuario",userData,"token de acceso",accessToken);
+
+
   if (!accessToken) {
     return <Navigate to="/login" />;
   }
-
-  const userRole = (userData as User).role;
   
-  if (!allowedRoles.includes(userRole)) {
+  const userRoles = (userData as User).roles? (userData as User).roles.map((role:any) => role.role_name):['admin']; 
+  // Verificar si al menos uno de los roles del usuario está en los roles permitidos
+  const hasAccess = userRoles.some((role:any) => allowedRoles.includes(role));
+  
+  if (!hasAccess) {
     return <Navigate to="/" />;
   }
 

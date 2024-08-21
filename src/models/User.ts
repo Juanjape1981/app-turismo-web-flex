@@ -1,19 +1,21 @@
+import Status from "../redux/types/types";
+import { Role } from "./RoleModel";
+
 export default interface User {
-  id: number;
-  public_id: string;
-  nombre: string;
-  apellido: string;
-  pais: string;
-  ciudad: string;
-  fecha_nacimiento: string;
+  user_id: number;
+  first_name: string; 
+  last_name: string;
+  country: string; 
+  city: string; 
+  birth_date: string; 
   email: string;
-  nro_telefono?: string;
-  sexo?: string;
-  suscrito_newsletter?: boolean;
-  estado: string;
-  role: string;
-  categories?: number[];
+  phone_number?: string; 
+  gender?: string; 
+  subscribed_to_newsletter?: boolean;
+  status: Status ;
   token: string;
-  exp: number;
-  image_url?:string
+  image_url?: string;
+  exp:number
+  roles: Role[]
 }
+

@@ -102,22 +102,24 @@
       border-color: var(--blueSoft-color);
     }
   
-.submit-button {
+.submit_button {
       width: 250px;
       min-width: 200px;
       padding: 10px;
       border: none;
-      background-color: var(--black-color);
+      background-color: var(--secundary-color);
       color: white;
       border-radius: 5px;
       margin-bottom: 10px;
       font-size: 13px;
-    }
-    
-.submit-button:hover {
+
+     &:hover {
       background-color: var(--blueSoft-color);
       cursor: pointer;
+    } 
     }
+    
+
     
 .forgot-password-button {
       width: 50%;
@@ -141,7 +143,9 @@
       height: auto;
       &:hover {
       // cursor: pointer;
-      background-color: var(--orangeSoft-color)
+      background-color: #f0a226;
+      // color: var(--secundary-color);
+     
      
     }
     }

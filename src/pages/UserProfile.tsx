@@ -7,9 +7,10 @@ const UserProfile = () => {
   const { userData } = useAppSelector((state: RootState) => state.user);
   const user = userData as any;
   const navigate = useNavigate();
+console.log(user);
 
   const handleEdit = () => {
-    navigate('/edit-profile');
+    // navigate('/edit-profile');
   };
 
   return (
@@ -25,17 +26,17 @@ const UserProfile = () => {
           />
         </div>
         <div className="profile-info">
-          <p><strong>Nombre:</strong> {user.nombre}</p>
-          <p><strong>Apellido:</strong> {user.apellido}</p>
+          <p><strong>Nombre:</strong> {user.first_name}</p>
+          <p><strong>Apellido:</strong> {user.last_name}</p>
           <p><strong>Email:</strong> {user.email}</p>
-          <p><strong>País:</strong> {user.pais}</p>
-          <p><strong>Ciudad:</strong> {user.ciudad}</p>
+          <p><strong>País:</strong> {user.country}</p>
+          <p><strong>Ciudad:</strong> {user.city}</p>
           <p><strong>Fecha de Nacimiento:</strong> {user.fecha_nacimiento}</p>
-          <p><strong>Teléfono:</strong> {user.nro_telefono || 'N/A'}</p>
-          <p><strong>Género:</strong> {user.sexo}</p>
+          <p><strong>Teléfono:</strong> {user.phone_number || 'N/A'}</p>
+          <p><strong>Género:</strong> {user.gender}</p>
           <p><strong>Rol:</strong> {user.role}</p>
-          <p><strong>Estado:</strong> {user.estado}</p>
-          <p><strong>Suscrito a Newsletter:</strong> {user.suscrito_newsletter ? 'Sí' : 'No'}</p>
+          <p><strong>Estado:</strong> {user.status.name}</p>
+          {/* <p><strong>Suscrito a Newsletter:</strong> {user.suscrito_newsletter ? 'Sí' : 'No'}</p> */}
         </div>
         </div>
         <div>

@@ -79,12 +79,84 @@ export const routes: RouteProps[] = [
         name: "EnConstruccion"
     },
     {
-        path: "/profile",
+        path: "/userProfile",
         element: lazy(async () => await import("../pages/UserProfile")),
         name: "UserProfile",
         layout: lazy(async () => await import("../pages/Layout/layout")),
         authorization: {
-            allowedRoles: ['Admin', 'Turista', 'Comercio']
+            allowedRoles:['admin', 'tourist', 'associated']
+        }
+    },
+    {
+        path: "/dashboard",
+        element: lazy(async () => await import("../pages/Dashboard")),
+        name: "Panel",
+        layout: lazy(async () => await import("../pages/Layout/layout")),
+        authorization: {
+            allowedRoles: ['admin', 'tourist', 'associated']
+        }
+    },
+    {
+        path: "/gestion-usuarios",
+        element: lazy(async () => await import("../pages/UserManagement")),
+        name: "Panel",
+        layout: lazy(async () => await import("../pages/Layout/layout")),
+        authorization: {
+            allowedRoles: ['admin', 'tourist', 'associated']
+        }
+    },
+    {
+        path: "/puntos_turisticos",
+        element: lazy(async () => await import("../pages/UnderConstruction")),
+        name: "TouristPoints",
+        layout: lazy(async () => await import("../pages/Layout/layout")),
+        authorization: {
+            allowedRoles: ['admin', 'tourist', 'associated']
+        }
+    },
+    {
+        path: "/notificaciones",
+        element: lazy(async () => await import("../pages/UnderConstruction")),
+        name: "Notifications",
+        layout: lazy(async () => await import("../pages/Layout/layout")),
+        authorization: {
+            allowedRoles: ['admin', 'tourist', 'associated']
+        }
+    },
+    {
+        path: "/reportes",
+        element: lazy(async () => await import("../pages/UnderConstruction")),
+        name: "Reports",
+        layout: lazy(async () => await import("../pages/Layout/layout")),
+        authorization: {
+            allowedRoles: ['admin', 'tourist', 'associated']
+        }
+    },
+    {
+        path: "/socios",
+        element: lazy(async () => await import("../pages/UnderConstruction")),
+        name: "Reports",
+        layout: lazy(async () => await import("../pages/Layout/layout")),
+        authorization: {
+            allowedRoles: ['admin', 'tourist', 'associated']
+        }
+    },
+    {
+        path: "/promociones",
+        element: lazy(async () => await import("../pages/AllPromotions")),
+        name: "Promociones",
+        layout: lazy(async () => await import("../pages/Layout/layout")),
+        authorization: {
+            allowedRoles: ['admin', 'tourist', 'associated']
+        }
+    },
+    {
+        path: "/partner",
+        element: lazy(async () => await import("../pages/PartnerDetail")),
+        name: "Sucursales",
+        layout: lazy(async () => await import("../pages/Layout/layout")),
+        authorization: {
+            allowedRoles: ['admin', 'tourist', 'associated']
         }
     }
 ];

@@ -8,21 +8,28 @@
     --font-firaCode: "Fira Code", monospace;
 
     //colors
-    --primary-color: #c96d0b;
+    $primary-color: #F1AD3E;
+    --primary-color: #F1AD3E;
     --secundary-color: #317ABB;
+    --blueSoft-color: #318ad9;
+    --blue-light-color: #64C9ED;
+    --grey-color: #e9e9e9;
     --black-color: #101010;
     --tertiary-color: #ECECEC;
-    --blueSoft-color: #2b7bc2;
-    --orangeSoft-color: #faa925;
-
+    
+    --orangeSoft-color: #fcb646;
+    
     --balloon-border-radius: 5px;
-    --balloon-color: var(--yellow-color);
+    --balloon-color: var(--secundary-color);
     --balloon-text-color: var(--primary-color);
     --balloon-font-size: 15px;
     --balloon-move: 30px;
-    
     // --secundary-color: #084f4d;
     // --primarysoft-color: #37bcb1;
     // --accent-color: #f0f0f0;
     
 }
+// naranja: #F1AD3E
+//         mostaza: #d59831
+//         azul: #3179BB
+//         celeste: #64C9ED

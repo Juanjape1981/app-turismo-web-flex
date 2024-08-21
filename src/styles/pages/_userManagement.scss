@@ -1,0 +1,199 @@
+.user-management {
+    min-height: 100vh;
+    width: 80%;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    font-family: 'Arial', sans-serif;
+    & .filters{
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 15px;
+        align-items: self-start;
+    }
+    & .contBtn{
+        width: 100%;
+        display: flex;
+        margin-bottom: 10px;
+        justify-content: center;
+    }
+    & .btnFilter{
+        cursor: pointer;
+        width: 10%;
+        background-color: var(--secundary-color);
+        // padding: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 2.5rem;
+        color: #ffffff;
+        box-shadow: 0px 4px 2px -3px rgba(0,0,0,0.75);
+        border-radius: 10px;
+        &:hover{
+            background-color: var(--blueSoft-color);
+        }
+    }
+    & .inputFilter{
+        padding-left:  .75em;
+        border: 1px solid #d9d9d9;
+        border-radius: .1875em;
+        width: 15%;
+        height: 2.5rem !important;
+        margin-top: 10px;
+        outline: none;
+        color: #333;
+        font-size: .9rem;
+        & option{
+            font-size: .9rem;
+            color: #333;
+        }
+    }
+    h1 {
+        font-size: 1.2rem;
+        margin-bottom: 20px;
+        text-align: center;
+        color: #5e5e5e;
+    }
+
+    ul {
+        list-style-type: none;
+        padding: 0;
+
+        li {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.3s ease;
+            cursor: pointer;
+
+            &:hover {
+                background-color: #f1f1f1;
+            }
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+
+            .user-info {
+                display: flex;
+                align-items: center;
+                width: 70%;
+                .user-avatar {
+                    width: 50px;
+                    height: 50px;
+                    border-radius: 50%;
+                    overflow: hidden;
+                    // background-color: #ccc;
+                    margin-right: 15px;
+                    & img{
+                        width: 100%;
+                    }
+                }
+
+                .user-details {
+                    .user-name {
+                        font-size: 1.2rem;
+                        font-weight: bold;
+                        color: #555;
+                    }
+
+                    .user-email {
+                        font-size: 0.9rem;
+                        color: #777;
+                    }
+                }
+            }
+
+            .user-roles {
+                font-size: 0.9rem;
+                color: #888;
+                width: 20%;
+            }
+        }
+    }
+}
+.swal2-inputDate{
+    width: 62%;
+    height: 2.5em;
+    margin-top: 10px;
+    padding-left:  .75em;
+    border: 1px solid #d9d9d9;
+    border-radius: .1875em;
+    outline: none;
+    font-size: 1rem;
+        color: #888;
+    & option{
+        font-size: 1.2rem;
+        color: #555555;
+    }
+}
+.swal2-input{
+    width: 90% !important;
+    height: 2.5rem !important;
+    margin-top: 10px;
+}
+.swal2-popup.swal2-modal.swal2-show{
+    width: 60%;
+}
+.swal2-html-container{
+    display: flex;
+    justify-content: center;
+}
+.status-role{
+    display: flex;
+    flex-direction: row;
+    // width: 100%;
+    margin-top: 10px;
+    align-self: center;
+    justify-content: space-evenly;
+    & .role{
+        display: flex;
+        align-items: flex-start;
+        flex-direction: row;
+        width: 60%;
+        height: 2.5rem;
+        justify-content: space-between;
+        & .status{
+            display: flex;
+            align-items: center;
+            & label{
+                margin-left: 10px;
+                font-size: 0.9rem;
+                color: #888;
+            }
+        }
+    }
+  
+}
+.btnRegister{
+    cursor: pointer;
+    width: 15%;
+    background-color: var(--secundary-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 2.5rem;
+    color: #ffffff;
+    box-shadow: 0px 4px 2px -3px rgba(0,0,0,0.75);
+    border-radius: 10px;
+    &:hover{
+        background-color: var(--blueSoft-color);
+    }
+
+}
+.swal2-actions{
+    & button{
+        max-width: 150px;
+        margin-top: 0;
+    }
+    .swal2-cance{
+        display: flex;
+    }
+    }
