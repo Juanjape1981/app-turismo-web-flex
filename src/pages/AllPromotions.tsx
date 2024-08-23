@@ -4,7 +4,7 @@ import '../styles/pages/_AllPromotions.scss';
 import { PromotionUpdateModel } from '../models/PromotionModel';
 import EditPromotionModal from './EditPromotionModal';
 import { useEffect, useState } from 'react';
-import { createPromotion, fetchAllPromotions, updatePromotionById } from '../redux/actions/promotionActions';
+import { createPromotion, deletePromotionById, fetchAllPromotions, updatePromotionById } from '../redux/actions/promotionActions';
 import { formatDateTo_DD_MM_AAAA } from '../utils/dateUtils';
 import { fetchStatuses } from '../redux/actions/userActions';
 import { fetchCategories } from '../redux/actions/globalDataActions';
@@ -15,14 +15,14 @@ import { fetchPartnerById } from '../redux/actions/partnerActions';
 
 const AllPromotions = () => {
     const dispatch = useAppDispatch();
-    const promotions = useAppSelector((state: RootState) => state.promotions.allPromotions);
+    const promotions = useAppSelector((state: RootState) => state.promotions.allPromotions.filter(promotion => promotion.status.name !== 'deleted'));
     const categories = useAppSelector((state: RootState) => state.globalData.categories);
     const partner = useAppSelector((state: RootState) => state.partner.partnerData);
     const [selectedPromotion, setSelectedPromotion] = useState<PromotionUpdateModel | null>(null);
     const [isModalOpen, setModalOpen] = useState(false);
     const [isCreateModal, setIsCreateModal] = useState(false);
     const userData = useAppSelector((state: RootState) => state.user.userData) as User;
-
+    const statuses = useAppSelector(state => state.user.statuses); 
 
     console.log("usuario en las promociones", userData);
 
@@ -66,11 +66,13 @@ const AllPromotions = () => {
         setIsCreateModal(true);
     };
     const handleDelete = (promotionId: number) => {
-        console.log(promotionId);
+        // console.log(promotionId);
+        // console.log("estado filtrado",statuses);
+        const status = statuses?.filter(status => status.name == "deleted")
+        console.log("estado filtrado",status);
+        
+        dispatch(deletePromotionById(promotionId, status))
 
-        if (window.confirm('¿Estás seguro de que deseas eliminar esta promoción?')) {
-            // dispatch(deletePromotion(promotionId));
-        }
     };
 
     const handleModalClose = () => {

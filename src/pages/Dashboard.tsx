@@ -10,9 +10,9 @@ const Dashboard = () => {
     const renderContent = () => {
         // if (user?.role === 'partner') {
             if (user) {
-            return <PartnerDetail />;
+            // return <PartnerDetail />;
         }
-        return <div>No tiene permisos para acceder a este contenido.</div>;
+        return <div>Actualización versión 23/08/2024</div>;
     };
 
     return (

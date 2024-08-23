@@ -5,8 +5,7 @@ import {
   setBranchPromotions,
   setSelectedPromotion,
   addPromotion,
-  updatePromotion,
-  deletePromotion
+  updatePromotion
 } from "../reducers/promotionReducer";
 import { Promotion } from "../../models/PromotionModel";
 
@@ -81,12 +80,17 @@ const updatePromotionById = (promotionId: number, promotionData: Promotion, dele
   };
 };
 
-// Eliminar una promoción
-const deletePromotionById = (promotionId: number) => {
+// Eliminar una promoción ----- Borrado lógico ------
+const deletePromotionById = (promotionId: number, status: any) => {
+  console.log("status en action",status);
+  
   return async (dispatch: Dispatch) => {
     try {
-      await axios.delete(`${URL}/promotions/${promotionId}`);
-      dispatch(deletePromotion(promotionId));
+
+      const responseUpdate = await axios.put(`${URL}/promotions/${promotionId}`, {status_id:status[0].id});
+      console.log("respuesta de la eliminacion",responseUpdate);
+      
+      dispatch(updatePromotion(responseUpdate.data));
     } catch (error) {
       console.error(`Error al eliminar la promoción ${promotionId}:`, error);
     }
