@@ -21,6 +21,7 @@ export interface Promotion {
 }
 
 export interface PromotionUpdateModel {
+  promotion_id?: number;
   title: string;
   description: string;
   start_date: string; 
@@ -29,7 +30,7 @@ export interface PromotionUpdateModel {
   partner_id: number; 
   categories: Category[]
   images: PromotionImage[];
-  status: number;
+  status: any;
   discount_percentage: number;
   available_quantity:number
 }

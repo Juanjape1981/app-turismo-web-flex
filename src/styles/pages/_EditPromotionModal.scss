@@ -61,34 +61,38 @@
           min-height: 80px;
         }
       }
-  
-      & button {
-        margin-top: 1rem;
-        padding: 0.75rem;
-        font-size: 1rem;
+      .btsDiv{
+        width: 100%;
+        display: flex;
+        justify-content: space-evenly;
+      }
+      .subBtn {
+        width: 35%;
+        margin-top: 10px;
+        padding: 10px;
         border: none;
         border-radius: 4px;
         cursor: pointer;
-        transition: background-color 0.3s ease;
-  
-        &:first-of-type {
-          background-color: var(--secundary-color);
-          color: #fff;
-  
-          &:hover {
+        background: var(--secundary-color);
+        color: #fff;
+        margin-right: 10px;
+        &:hover{
             background-color: var(--blueSoft-color);
-          }
         }
-  
-        &:last-of-type {
-          background-color: #6c757d;
-          color: #fff;
-  
-          &:hover {
-            background-color: #5a6268;
-          }
+    }
+    .clsBtn{
+      width: 35%;
+        margin-top: 10px;
+        padding: 10px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        background: #6c757d;
+        color: #fff;
+        &:hover{
+            background-color: #929598;
         }
-      }
+    }
     }
   }
   .select_categ{
@@ -128,13 +132,56 @@
   }
   }
   .thumbnailImg{
-    width: 50px;
-    height: 50px;
+    width: 70px;
+    height: 70px;
+  }
+  .image-container{
+    width: 70px;
+    height: 70px;
+    .remove-imagebtn {
+      position: absolute;
+      top: 0;
+      right: 0;
+      background: rgba(227, 227, 227, 0.338);
+      color: #e8e7e7;
+      border: none;
+      border-radius: 50%;
+      width: 35px;
+      height: 35px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      &:hover{
+          background: rgba(216, 22, 22, 0.725);
+          color: #fff;
+      }
+      svg {
+          width: 20px;
+          height: 20px; 
+          fill: #eb1313;
+      }
+    }
   }
   .image-preview{
     display: flex;
     flex-direction: row;
-    // & button{
-        
-    // }
+    & .file-input{
+      height: 70px;
+      display: flex;
+      justify-content: center;
+      margin-right: 30px;
+      margin-left: 30px;
+    }
+  }
+  .fechas{
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    & label{
+      width: 40%;
+    }
+  }
+  .estado{
+    width: 100%;
   }

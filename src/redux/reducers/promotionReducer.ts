@@ -30,12 +30,23 @@ const promotionSlice = createSlice({
             state.allPromotions.push(action.payload);
             state.branchPromotions.push(action.payload);
         },
-        updatePromotion: (state, action: PayloadAction<Promotion>) => {
+        updatePromotion: (state, action: PayloadAction<Partial<Promotion>>) => {
             const indexAll = state.allPromotions.findIndex(promo => promo.promotion_id === action.payload.promotion_id);
-            if (indexAll >= 0) state.allPromotions[indexAll] = action.payload;
-
+            if (indexAll >= 0) {
+                // Combina los datos existentes con los nuevos datos proporcionados
+                state.allPromotions[indexAll] = {
+                    ...state.allPromotions[indexAll],
+                    ...action.payload,
+                };
+            }
             const indexBranch = state.branchPromotions.findIndex(promo => promo.promotion_id === action.payload.promotion_id);
-            if (indexBranch >= 0) state.branchPromotions[indexBranch] = action.payload;
+            if (indexBranch >= 0) {
+                // Combina los datos existentes con los nuevos datos proporcionados
+                state.branchPromotions[indexBranch] = {
+                    ...state.branchPromotions[indexBranch],
+                    ...action.payload,
+                };
+            }
         },
         deletePromotion: (state, action: PayloadAction<number>) => {
             state.allPromotions = state.allPromotions.filter(promo => promo.promotion_id !== action.payload);

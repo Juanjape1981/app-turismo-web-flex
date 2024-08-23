@@ -49,10 +49,12 @@ const fetchPromotionById = (promotionId: number) => {
 };
 
 // Crear una nueva promoción
-const createPromotion = (branchId: number, promotionData: Promotion) => {
+const createPromotion = (promotionData: Promotion) => {
   return async (dispatch: Dispatch) => {
     try {
-      const response = await axios.post(`${URL}/branches/${branchId}/promotions`, promotionData);
+      const response = await axios.post(`${URL}//promotions`, promotionData);
+      console.log("respuesta de la creacion", promotionData);
+      
       dispatch(addPromotion(response.data));
     } catch (error) {
       console.error("Error al crear una nueva promoción:", error);
@@ -61,11 +63,18 @@ const createPromotion = (branchId: number, promotionData: Promotion) => {
 };
 
 // Actualizar una promoción existente
-const updatePromotionById = (promotionId: number, promotionData: Promotion) => {
+const updatePromotionById = (promotionId: number, promotionData: Promotion, deletedImageIds: number[]) => {
   return async (dispatch: Dispatch) => {
+    const imgDelete = {'image_ids': deletedImageIds}
     try {
-      const response = await axios.put(`${URL}/promotions/${promotionId}`, promotionData);
-      dispatch(updatePromotion(response.data));
+      if(deletedImageIds.length){
+        const responseDeleted= await axios.delete(`${URL}/promotion_images`,  { data: imgDelete } );
+      console.log(responseDeleted);}
+      
+      const responseUpdate = await axios.put(`${URL}/promotions/${promotionId}`, promotionData);
+      console.log("respuesta de la actualizacion",responseUpdate.data);
+      
+      dispatch(updatePromotion(responseUpdate.data));
     } catch (error) {
       console.error(`Error al actualizar la promoción ${promotionId}:`, error);
     }

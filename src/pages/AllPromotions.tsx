@@ -4,17 +4,20 @@ import '../styles/pages/_AllPromotions.scss';
 import { PromotionUpdateModel } from '../models/PromotionModel';
 import EditPromotionModal from './EditPromotionModal';
 import { useEffect, useState } from 'react';
-import { fetchAllPromotions } from '../redux/actions/promotionActions';
+import { createPromotion, fetchAllPromotions, updatePromotionById } from '../redux/actions/promotionActions';
 import { formatDateTo_DD_MM_AAAA } from '../utils/dateUtils';
 import { fetchStatuses } from '../redux/actions/userActions';
 import { fetchCategories } from '../redux/actions/globalDataActions';
 import CreatePromotionModal from '../components/createPromo/CreatePromotionModal';
 import User from '../models/User';
+import { fetchPartnerById } from '../redux/actions/partnerActions';
+
 
 const AllPromotions = () => {
     const dispatch = useAppDispatch();
     const promotions = useAppSelector((state: RootState) => state.promotions.allPromotions);
     const categories = useAppSelector((state: RootState) => state.globalData.categories);
+    const partner = useAppSelector((state: RootState) => state.partner.partnerData);
     const [selectedPromotion, setSelectedPromotion] = useState<PromotionUpdateModel | null>(null);
     const [isModalOpen, setModalOpen] = useState(false);
     const [isCreateModal, setIsCreateModal] = useState(false);
@@ -39,6 +42,9 @@ const AllPromotions = () => {
         dispatch(fetchAllPromotions());
         dispatch(fetchStatuses());
         dispatch(fetchCategories())
+        if(userData){
+        dispatch(fetchPartnerById(userData.user_id))    
+        }
     }, [dispatch]);
 
     // Filtrar las promociones
@@ -74,14 +80,13 @@ const AllPromotions = () => {
     const handleCreateModalClose = () => {
         setIsCreateModal(false)
     };
-    const handleSave = (editedPromotion: PromotionUpdateModel, deletedImageIds: any) => {
+    const handleSave = (idPromo:any, editedPromotion: any, deletedImageIds: any) => {
         console.log(editedPromotion, deletedImageIds);
-
-        // Guardar la promoción editada
+        dispatch(updatePromotionById(idPromo, editedPromotion, deletedImageIds))
+        
     };
     const handleCreateSave = (newPromotion: any) => {
-        console.log(newPromotion);
-        // dispatch(createPromotion(newPromotion));
+        dispatch(createPromotion(newPromotion));
         // setCreateModalOpen(false);
     };
     const handleClearFilters = () => {
@@ -179,6 +184,7 @@ const AllPromotions = () => {
 
             {selectedPromotion && (
                 <EditPromotionModal
+                idPromo={selectedPromotion.promotion_id}
                     isOpen={isModalOpen}
                     promotion={selectedPromotion}
                     onClose={handleModalClose}
@@ -187,11 +193,13 @@ const AllPromotions = () => {
             )}
             {isCreateModal && userData.user_id &&
                 <CreatePromotionModal
+                
                 isOpen={isCreateModal}
                 onClose={handleCreateModalClose}
                 onSave={handleCreateSave}
                 categories={categories}
                 partnerId={userData.user_id}
+                partnerData={partner}
             />}
         </div>
     );
