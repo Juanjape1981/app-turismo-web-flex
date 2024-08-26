@@ -45,8 +45,8 @@ const Sidebar: React.FC = () => {
           style: "panelicono"
         },
         {
-          path: "/socios",
-          name: "Asociados",
+          path: "/socioPerfil",
+          name: "Perfil de asociado",
           style: "asociados"
         },
         {

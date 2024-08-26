@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { createUser,assignRoleToUser } from '../../redux/actions/userActions';
+import { createUser, assignRoleToUser } from '../../redux/actions/userActions';
 import Swal from 'sweetalert2';
 import '../../styles/components/_RegisterPartnerModal.scss';
 import { useAppDispatch } from '../../redux/store/hooks';
@@ -8,7 +8,9 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/store/store';
 import { fetchAllPromotions } from '../../redux/actions/promotionActions';
 import { fetchCountries } from '../../redux/actions/globalDataActions';
-import MarketStall from '../../assets/icons/MarketStall.svg'
+import MarketStall from '../../assets/icons/MarketStall.svg';
+import Loader from '../Loader/Loader';
+
 
 interface RegisterPartnerModalProps {
   isOpen: boolean;
@@ -16,253 +18,302 @@ interface RegisterPartnerModalProps {
 }
 
 const RegisterPartnerModal: React.FC<RegisterPartnerModalProps> = ({ isOpen, onClose }) => {
-    const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch();
+
+  // Acceder a los países y categorías desde el estado global
+  const countries = useSelector((state: RootState) => state.globalData.countries);
+  const categories = useSelector((state: RootState) => state.globalData.categories);
+  const roles = useSelector((state: RootState) => state.user.roles);
+  const [loading, setLoading] = useState(false);
   
-    // Acceder a los países y categorías desde el estado global
-    const countries = useSelector((state: RootState) => state.globalData.countries);
-    const categories = useSelector((state: RootState) => state.globalData.categories);
   
-    useEffect(() => {
-        dispatch(fetchAllPromotions());
-        dispatch(fetchCountries());
-    }, [dispatch]);
-    const [userForm, setUserForm] = useState({
-      password: '',
-      first_name: '',
-      last_name: '',
-      country: '',
-      email: '',
-      status_id: 1,
-      city: '',
-      birth_date: '',
-      phone_number: '',
-      gender: 'male',
-      subscribed_to_newsletter: false,
-    //   image_url: ''
-    });
-  console.log("formulario de crear usuario",userForm);
+console.log("categorias",categories);
+
+  useEffect(() => {
+    dispatch(fetchAllPromotions());
+    dispatch(fetchCountries());
+    
+  }, [dispatch]);
+
+  const [formData, setFormData] = useState({
+    password: '',
+    confirmPassword: '',
+    first_name: '',
+    last_name: '',
+    country: '',
+    email: '',
+    status_id: 1,
+    city: '',
+    birth_date: '',
+    phone_number: '',
+    gender: 'male',
+    subscribed_to_newsletter: false,
+    // Partner data
+    address: '',
+    contact_info: '',
+    business_type: '',
+    category_ids: [] as number[],
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value, type } = e.target;
   
-    const [partnerForm, setPartnerForm] = useState({
-      address: '',
-      contact_info: '',
-      business_type: '',
-      category_ids: [] as number[]
-    });
-    console.log("formulario de crear asociado",partnerForm);
-    const [currentUserId, setCurrentUserId] = useState<number | null>(null);
-  
-    const handleUserFormChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-      setUserForm({
-        ...userForm,
-        [e.target.name]: e.target.type === 'checkbox' ? (e.target as HTMLInputElement).checked : e.target.value
+    if (type === 'checkbox') {
+      const checked = (e.target as HTMLInputElement).checked;
+      setFormData({
+        ...formData,
+        [name]: checked
       });
-    };
-  
-    const handlePartnerFormChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-      const { name, value } = e.target;
-      if (name === 'category_ids') {
-        const categoryId = parseInt(value);
-        const newCategoryIds = partnerForm.category_ids.includes(categoryId)
-          ? partnerForm.category_ids.filter(id => id !== categoryId)
-          : [...partnerForm.category_ids, categoryId];
-        setPartnerForm({
-          ...partnerForm,
-          category_ids: newCategoryIds
-        });
-      } else {
-        setPartnerForm({
-          ...partnerForm,
-          [name]: value
-        });
-      }
-    };
-  
-    const handleRegisterUser = async () => {
-        try {
-          const createdUserAction = await dispatch(createUser(userForm));
-          const createdUser = createdUserAction.payload; 
+    } else {
+      setFormData({
+        ...formData,
+        [name]: value
+      });
+    }
+  };
+
+  const handleCategoryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(e.target.value);
+    
+    const categoryId = parseInt(e.target.value);
+    setFormData((prevFormData) => {
+      const newCategoryIds = prevFormData.category_ids.includes(categoryId)
+        ? prevFormData.category_ids.filter(id => id !== categoryId)
+        : [...prevFormData.category_ids, categoryId];
+      return { ...prevFormData, category_ids: newCategoryIds };
+    });
+  };
+
+  const handleSubmit = async () => {
+    setLoading(true)
+    if (formData.password !== formData.confirmPassword) {
+      Swal.fire({
+        title: 'Error',
+        text: 'Las contraseñas no coinciden',
+        icon: 'error',
+        confirmButtonText: 'OK'
+      });
+      setLoading(false)
+      return;
+    }
+    try {
+      const { address, contact_info, business_type, category_ids,confirmPassword, ...userForm } = formData;
+      console.log("formData en la creacion ",formData);
+
+      const createdUserAction = await dispatch(createUser(userForm));
+      console.log("created user en payload",createdUserAction);
       
-          if (createdUserAction && createdUser) {
-            setCurrentUserId(createdUser.user_id);
-      
-            // Asignar el rol de asociado
-            const assignRoleAction = await dispatch(assignRoleToUser({
-              role_ids: [2],
-              user_id: createdUser.user_id
-            }));
-      
-            if (assignRoleAction) {
-              // Crear el Partner
-              const partnerData = {
-                ...partnerForm,
-                user_id: createdUser.user_id
-              };
-      
-              const createPartnerAction = await dispatch(createPartner(partnerData));
-      
-              if (createPartnerAction) {
-                Swal.fire({
-                  title: '¡Usuario creado exitosamente!',
-                  icon: 'success',
-                  confirmButtonText: 'OK'
-                });
-                onClose();
-              } else {
-                throw new Error('Error al crear el Partner');
-              }
-            } else {
-              throw new Error('Error al asignar el rol al usuario');
-            }
-          } else {
-            throw new Error('Error al crear el usuario');
-          }
-        } catch (error: any) {
-          Swal.fire({
-            title: 'Error',
-            text: error.message,
-            icon: 'error',
-            confirmButtonText: 'OK'
-          });
+      const rolAssociated = roles?.find(rol=> rol.role_name == "associated")
+      console.log("rol buscado",rolAssociated);
+      if (createdUserAction && rolAssociated) {
+        const data = {
+          role_ids: [rolAssociated.role_id],
+          user_id: createdUserAction.user_id
         }
-      };
-      
-  
-    return (
-      <div className={`modal ${isOpen ? 'open' : ''}`}>
-        <div className="modal-content">
-          <img src={MarketStall} className='iconos' />
-          <h2>Registrar Asociado</h2>
-          <div className="form-section">
-            <h3>Información del Usuario</h3>
-            <input
-              type="text"
-              name="first_name"
-              placeholder="Nombre"
-              value={userForm.first_name}
-              onChange={handleUserFormChange}
-            />
-            <input
-              type="text"
-              name="last_name"
-              placeholder="Apellido"
-              value={userForm.last_name}
-              onChange={handleUserFormChange}
-            />
-            <input
-              type="password"
-              name="password"
-              placeholder="Contraseña"
-              value={userForm.password}
-              onChange={handleUserFormChange}
-            />
-            <input
-              type="email"
-              name="email"
-              placeholder="Email"
-              value={userForm.email}
-              onChange={handleUserFormChange}
-            />
-            <select
-              name="country"
-              value={userForm.country}
-              onChange={handleUserFormChange}
-            >
-              <option value="">Seleccione un país</option>
-              {countries.map((country:any) => (
-                <option key={country.code} value={country.name}>
-                  {country.name}
-                </option>
-              ))}
-            </select>
-            <input
-              type="text"
-              name="city"
-              placeholder="Ciudad"
-              value={userForm.city}
-              onChange={handleUserFormChange}
-            />
-            <input
+        const assignRoleAction = await dispatch(assignRoleToUser(data));
+        console.log(assignRoleAction);
+        
+        if (assignRoleAction) {
+          const partnerData = {
+            address,
+            contact_info,
+            business_type,
+            category_ids,
+            user_id: createdUserAction.user_id
+          };
+          console.log("partnerData en la creacion ",partnerData);
+          const createPartnerAction = await dispatch(createPartner(partnerData));
+          setLoading(false)
+          if (createPartnerAction) {
+            Swal.fire({
+              title: '¡Usuario creado exitosamente!',
+              icon: 'success',
+              confirmButtonText: 'OK'
+            });
+           
+            onClose();
+          } else {
+            throw new Error('Error al crear el Partner');
+          }
+        } else {
+          throw new Error('Error al asignar el rol al usuario');
+        }
+      } else {
+        throw new Error('Error al crear el usuario');
+      }
+    } catch (error: any) {
+      setLoading(false)
+      Swal.fire({
+        title: 'Error',
+        text: error.message,
+        icon: 'error',
+        confirmButtonText: 'OK'
+      });
+    }
+  };
+
+  return (
+    <div className={`modal ${isOpen ? 'open' : ''}`}>
+       {loading && <Loader />}
+  <div className="modal-content">
+    <div className='divHeader'>
+      <img src={MarketStall} className="iconos" />
+    <h2>Registrar Asociado</h2>
+    <hr />
+    </div>
+    
+    <div className='cont_form-section'>
+      {/* <h3>Información del asociado</h3> */}
+    <div className="form-section">
+      <div className="form-columns">
+        <div className="column">
+          <input
+            type="text"
+            name="first_name"
+            placeholder="Nombre"
+            value={formData.first_name}
+            onChange={handleChange}
+          />
+          <input
+            type="text"
+            name="last_name"
+            placeholder="Apellido"
+            value={formData.last_name}
+            onChange={handleChange}
+          />
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            value={formData.email}
+            onChange={handleChange}
+          />
+          <input
               type="date"
               name="birth_date"
-              value={userForm.birth_date}
-              onChange={handleUserFormChange}
+              placeholder="Fecha de nacimiento"
+              // value={formData.birth_date}
+              onChange={handleChange}
+              // onFocus={(e) => (e.target.type = 'date')} 
+              // onBlur={(e) => (e.target.type = 'text')} 
             />
-            <input
-              type="text"
-              name="phone_number"
-              placeholder="Número de Teléfono"
-              value={userForm.phone_number}
-              onChange={handleUserFormChange}
-            />
-            <select name="gender" value={userForm.gender} onChange={handleUserFormChange}>
-              <option value="male">Masculino</option>
-              <option value="female">Femenino</option>
-              <option value="other">Otro</option>
-            </select>
-            {/* <input
-              type="url"
-              name="image_url"
-              placeholder="URL de la Imagen"
-              value={userForm.image_url}
-              onChange={handleUserFormChange}
-            /> */}
-            <label>
-              <input
-                type="checkbox"
-                name="subscribed_to_newsletter"
-                checked={userForm.subscribed_to_newsletter}
-                onChange={handleUserFormChange}
-              />
-              Suscribirse al boletín
-            </label>
-          </div>
-  
-          {currentUserId && (
-            <div className="form-section">
-              <h3>Información del Partner</h3>
-              <input
-                type="text"
-                name="address"
-                placeholder="Dirección"
-                value={partnerForm.address}
-                onChange={handlePartnerFormChange}
-              />
-              <input
-                type="email"
-                name="contact_info"
-                placeholder="Correo de Contacto"
-                value={partnerForm.contact_info}
-                onChange={handlePartnerFormChange}
-              />
-              <input
-                type="text"
-                name="business_type"
-                placeholder="Tipo de Negocio"
-                value={partnerForm.business_type}
-                onChange={handlePartnerFormChange}
-              />
-              <div className="checkbox-group">
-                <h4>Categorías</h4>
-                {categories.map((category:any) => (
-                  <label key={category.id}>
-                    <input
-                      type="checkbox"
-                      name="category_ids"
-                      value={category.id}
-                      checked={partnerForm.category_ids.includes(category.id)}
-                      onChange={handlePartnerFormChange}
-                    />
-                    {category.name}
-                  </label>
-                ))}
-              </div>
-            </div>
-          )}
-          <button onClick={handleRegisterUser}>Registrar Asociado</button>
-          <button onClick={onClose}>Cancelar</button>
+          <select
+            name="country"
+            value={formData.country}
+            onChange={handleChange}
+          >
+            <option value="">Seleccione un país</option>
+            {countries.map((country: any) => (
+              <option key={country.code} value={country.name}>
+                {country.name}
+              </option>
+            ))}
+          </select>
+          <input
+            type="text"
+            name="city"
+            placeholder="Ciudad"
+            value={formData.city}
+            onChange={handleChange}
+          />
         </div>
+        <div className="column">
+          
+          
+          <input
+            type="text"
+            name="phone_number"
+            placeholder="Número de Teléfono"
+            value={formData.phone_number}
+            onChange={handleChange}
+          />
+          <input
+            type="text"
+            name="address"
+            placeholder="Dirección"
+            value={formData.address}
+            onChange={handleChange}
+          />
+        </div>
+        
       </div>
-    );
-  };
-  
-  export default RegisterPartnerModal;
+      {/* <label>
+        <input
+          type="checkbox"
+          name="subscribed_to_newsletter"
+          checked={formData.subscribed_to_newsletter}
+          onChange={handleChange}
+        />
+        Suscribirse al boletín
+      </label> */}
+    {/* </div>
+
+    <div className="form-section"> */}
+      {/* <h3>Información del Partner</h3> */}
+      <div className="form-columns">
+        <div className="column">
+          
+          <input
+            type="text"
+            name="business_type"
+            placeholder="Tipo de Negocio"
+            value={formData.business_type}
+            onChange={handleChange}
+          />
+        </div>
+        <input
+            type="email"
+            name="contact_info"
+            placeholder="Correo de la empresa"
+            value={formData.contact_info}
+            onChange={handleChange}
+          />
+         <div className='passwordDiv'>
+  <input
+    type="password"
+    name="password"
+    placeholder="Contraseña"
+    value={formData.password}
+    onChange={handleChange}
+  />
+  <input
+    type="password"
+    name="confirmPassword"
+    placeholder="Confirmar Contraseña"
+    value={formData.confirmPassword}
+    onChange={handleChange}
+  />
+</div>
+    </div>
+      </div>
+        
+        <div className="form-section3">
+ <div className="column">
+          <div className="checkbox-group">
+            <h4>Categorías</h4>
+            {categories.map((category: any) => (
+              <label key={category.category_id}>
+                <input
+                  type="checkbox"
+                  name="category_ids"
+                  value={category.category_id}
+                  checked={formData.category_ids.includes(category.category_id)}
+                  onChange={handleCategoryChange}
+                />
+                {category.name}
+              </label>
+            ))}
+          </div>
+        </div>
+        </div>
+       </div>
+       <div className='btnsDiv'>
+          <button onClick={handleSubmit}>Registrar Asociado</button>
+          <button onClick={onClose}>Cancelar</button>
+       </div>
+  </div>
+</div>
+)
+};
+
+export default RegisterPartnerModal;

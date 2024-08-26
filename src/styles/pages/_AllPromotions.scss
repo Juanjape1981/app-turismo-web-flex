@@ -11,6 +11,11 @@
         font-size: 2rem;
         color: #333;
         margin-bottom: 20px;
+        @media (max-width: 480px) {
+            font-size: 1rem;
+            margin-bottom: 0px;
+            margin-top: 10px;
+        }
     }
 
     .filters {
@@ -51,7 +56,6 @@
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
         thead {
-            // background-color: var(--secundary-color);
             color: var(--secundary-color);
 
             th {
@@ -68,12 +72,13 @@
                 }
 
                 td {
-                    
                     padding: 12px 15px;
                     border-bottom: 1px solid #ddd;
                     font-size: 1rem;
                     color: #333;
-
+                    @media (max-width: 480px) {
+                        font-size: 0.8rem;
+                    }
                     &:last-child {
                         text-align: right;
                     }
@@ -81,11 +86,10 @@
             }
         }
 
-        .edit-btn2 {
+        .edit-btn2, .delete-btn {
             width: 50px;
             padding: 8px 12px;
             background-color: transparent;
-            color: var(--secundary-color);
             border: none;
             border-radius: 4px;
             cursor: pointer;
@@ -93,30 +97,20 @@
             transition: background-color 0.3s ease;
 
             &:hover {
-                // background-color: var(--blueSoft-color);
-                color:  var(--blueSoft-color);
+                color: var(--blueSoft-color);
             }
         }
 
         .delete-btn {
-            width: 50px;
-            padding: 8px 12px;
-            // background-color: #af2432;
-            background-color: transparent;  
-            color: #af2432;;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-
+            color: #af2432;
             &:hover {
-                // background-color: #c82333;
                 color: #e61a2f;
             }
         }
     }
 }
-.clearBtn{
+
+.clearBtn {
     display: flex;
     justify-content: space-around;
     align-self: flex-start;
@@ -128,33 +122,130 @@
     color: #f1f1f1;
     border-radius: 5px;
     cursor: pointer;
-    &:hover{
+
+    &:hover {
         background-color: var(--blueSoft-color);
     }
 }
-.align-center{
+
+.align-center {
     text-align: center !important;
 }
-.filtroFechas{
+
+.filtroFechas {
     display: flex;
     flex-direction: column;
     font-size: small;
     color: #333;
 }
-.createPromotion{
+
+.createPromotion {
     display: flex;
     width: 70%;
     justify-content: space-between;
-    & .createProm-btn{
+    @media (max-width: 480px) {
+        flex-direction: column-reverse;
+    }
+    .createProm-btn {
         color: #f1f1f1;
         border-radius: 5px;
         height: 45px;
         width: 200px;
         background-color: var(--primary-color);
         cursor: pointer;
-
-        &:hover{
+        &:hover {
             background-color: var(--orangeSoft-color);
         }
+        @media (max-width: 480px) {
+            width: 150px;
+        }
+    }
+}
+
+/* Media Queries para Responsividad */
+@media (max-width: 768px) {
+    .promotions-list {
+        padding: 15px;
+    }
+
+    h2 {
+        font-size: 1rem;
+        margin-bottom: 0px;
+    }
+
+    .filters {
+        flex-direction: column;
+
+        input {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+    }
+
+    .promotions-table {
+        th, td, tr {
+            padding: 10px;
+            font-size: 0.9rem;
+        }
+
+        .edit-btn2, .delete-btn {
+            width: auto;
+            padding: 6px 8px;
+        }
+    }
+
+    .clearBtn {
+        width: 100%;
+    }
+
+    .createPromotion {
+        flex-direction: column-reverse;
+        width: 100%;
+
+        .createProm-btn {
+            width: 100%;
+            margin-top: 10px;
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    .promotions-list {
+        padding: 10px;
+    }
+
+    h2 {
+        font-size: 1rem;
+        margin-bottom: 0px;
+    }
+
+    .filters {
+        padding: 10px;
+    }
+
+    .promotions-table {
+        th, td, tr {
+            padding: 8px;
+            font-size: 0.8rem;
+        }
+    }
+
+    .clearBtn {
+        padding: 6px 10px;
+    }
+
+    .createPromotion .createProm-btn {
+        height: 40px;
+        width: 50%;
+        align-self: center;
+    }
+}
+.table-container {
+    width: 100%;
+    overflow-x: auto;  // Permite el scroll horizontal
+    -webkit-overflow-scrolling: touch;  // Suaviza el scroll en dispositivos móviles
+
+    .promotions-table {
+        min-width: 600px;  // Asegura que la tabla mantenga su estructura
     }
 }

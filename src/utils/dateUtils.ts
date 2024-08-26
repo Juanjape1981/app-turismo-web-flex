@@ -6,3 +6,8 @@ export const formatDateTo_DD_MM_AAAA = (dateString: string): string => {
 
     return `${day}-${month}-${year}`;
 };
+
+export const formatDateTo_YYYY_MM_DD = (dateString: string) => {
+    const date = new Date(dateString);
+    return date.toISOString().split('T')[0];
+  };

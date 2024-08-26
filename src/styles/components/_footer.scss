@@ -51,4 +51,7 @@ p {
     align-items: center;
     display: flex;
     flex-direction: column;
+    @media (max-width: 500px) {
+        text-align: center;
+      }
 }

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { compressAndConvertToBase64 } from '../../utils/imageUtils';
 import '../../styles/components/_CreatePromoModal.scss'
 import { Partner } from '../../models/PartnerModels';
+import coupon from '../../assets/icons/Coupon.svg'
 
 interface Category {
     id: number;
@@ -40,7 +41,7 @@ const CreatePromotionModal = ({
 
 
     // Obtén el partner_id desde el estado global
-    console.log("partner data", partnerData);
+    // console.log("partner data", partnerData);
 
     const handleCategoryChange = (e: React.ChangeEvent<HTMLInputElement>, categoryId: number) => {
         if (e.target.checked) {
@@ -50,9 +51,9 @@ const CreatePromotionModal = ({
         }
     };
     const isFormValid = () => {
-        return title && description && startDate && expirationDate && discountPercentage && availableQuantity && branchId && selectedCategories.length > 0;
+        return title && description && startDate && expirationDate && discountPercentage && availableQuantity && branchId && images.length &&selectedCategories.length > 0;
     };
-    // console.log("formulario lleno",!isFormValid());
+    console.log("formulario lleno",!isFormValid());
     
     const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files) {
@@ -95,14 +96,15 @@ const CreatePromotionModal = ({
             description,
             start_date: startDate,
             expiration_date: expirationDate,
-            qr_code: `${title}${expirationDate}`,
+            //genero qr con el id de sucursal, titley fecha de vencimiento
+            qr_code: `${branchId}${title}${expirationDate}`,
             discount_percentage: parseFloat(discountPercentage),
             available_quantity: parseInt(availableQuantity),
             partner_id: partnerId,
             category_ids: selectedCategories,
             images: processedImages,
         };
-        console.log("nueva promocion a crear", newPromotion);
+        // console.log("nueva promocion a crear", newPromotion);
 
         onSave(newPromotion);
                 onClose();
@@ -113,7 +115,11 @@ const CreatePromotionModal = ({
     return (
         <div className={`modalCreate ${isOpen ? 'is-open' : ''}`}>
                  <div className="modal-contentCreate">
-                <h2>Crear Promoción</h2>
+                 <div className='divHeader'>
+                    <img src={coupon} className="iconos" />
+                    <h2>Crear Promoción</h2>
+                 <hr />
+                 </div>
                 <form>
                     <div className='campos'>
 
@@ -189,7 +195,7 @@ const CreatePromotionModal = ({
                     </div>
                    
                             <div className='btns_sub_cls'>
-                               <button className='subBtn' type="button" onClick={handleSubmit} disabled={!isFormValid()} >
+                               <button className={isFormValid()? 'subBtn': 'btnInactive'} type="button" onClick={handleSubmit} disabled={!isFormValid()} >
                         Guardar
                     </button>
                     <button className='clsBtn' type="button" onClick={onClose}>

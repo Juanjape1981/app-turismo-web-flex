@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import { RootState } from '../redux/store/store';
-import PartnerDetail from './PartnerDetail';
+// import PartnerDetail from './PartnerDetail';
 import '../styles/pages/Dashboard.scss'
 
 const Dashboard = () => {

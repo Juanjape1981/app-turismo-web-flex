@@ -9,6 +9,7 @@ import { useAppDispatch } from '../redux/store/hooks';
 import '../styles/pages/_userManagement.scss';
 import RegisterPartnerModal from '../components/RegisterPartnerModal/RegisterPartnerModal';
 import MarketStall from '../assets/icons/MarketStallwhite.svg';
+import { fetchCategories } from '../redux/actions/globalDataActions';
 
 const UserManagement = () => {
     const users = useSelector((state: RootState) => state.user.users);
@@ -34,6 +35,7 @@ const UserManagement = () => {
         dispatch(fetchAllUsers());
         dispatch(fetchRoles());
         dispatch(fetchStatuses());
+        dispatch(fetchCategories())
     }, [dispatch]);
 
     const handleUserClick = (user: User) => {
@@ -155,8 +157,11 @@ const UserManagement = () => {
     };
     return (
         <div className="user-management">
+            <div className='divbtnreg'>
             <button className='btnRegister' onClick={openModal}>
-            <img src={MarketStall} className='iconos' />Registrar Asociado</button>
+            <img src={MarketStall} className='iconos' />Registrar Asociado</button>    
+            </div>
+            
             <h1>Gestión de Usuarios</h1>
            {isModalOpen && <RegisterPartnerModal isOpen={isModalOpen} onClose={closeModal} />}
             

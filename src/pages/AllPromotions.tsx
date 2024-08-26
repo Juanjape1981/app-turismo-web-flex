@@ -152,6 +152,7 @@ const AllPromotions = () => {
             {filteredPromotions?.length === 0 ? (
                 <p>No hay promociones disponibles.</p>
             ) : (
+                <div className="table-container">
                 <table className="promotions-table">
                     <thead>
                         <tr>
@@ -182,6 +183,7 @@ const AllPromotions = () => {
 
                     </tbody>
                 </table>
+                </div>
             )}
 
             {selectedPromotion && (

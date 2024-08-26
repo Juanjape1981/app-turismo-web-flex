@@ -10,7 +10,8 @@
     z-index: 1;
     justify-content: space-between;
     @media (max-width: 500px) {
-      flex-direction: column;
+      flex-direction: row;
+      padding: 15px;
 
     }
   }
@@ -21,6 +22,7 @@
     padding-top: 1%;
     padding-bottom: 1%;
     padding-left: 2%;
+    
     img{
       width: 50%;
       &:hover {
@@ -28,7 +30,7 @@
     }
     }
     @media (max-width: 500px) {
-      width: 50%;
+      width: 30%;
     }
     &:hover {
     cursor: pointer;
@@ -50,11 +52,12 @@
       margin-right: 100px;
       @media (max-width: 500px) {
         margin-left: 0px;
+        margin-right: 0px;
       }
           }
           @media (max-width: 500px) {
-            margin-left: 10px;
-            width: 100%;
+            width: 40%;
+            flex-direction: column-reverse;
             justify-content: space-around;
           }
           
@@ -92,6 +95,9 @@
       // font-weight: bold;
       cursor: pointer;
   }
+  @media (max-width: 500px) {
+    font-size: 0.8rem;
+  }
   }
   .divUser{
     display: flex;
@@ -107,6 +113,8 @@
     width: 60px;
     @media (max-width: 500px) {
       margin-left: 5px;
+      height: 40px;
+      width: 40px;
     }
   }
   .logOut{

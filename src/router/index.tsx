@@ -134,7 +134,7 @@ export const routes: RouteProps[] = [
         }
     },
     {
-        path: "/socios",
+        path: "/socioPerfil",
         element: lazy(async () => await import("../pages/UnderConstruction")),
         name: "Reports",
         layout: lazy(async () => await import("../pages/Layout/layout")),

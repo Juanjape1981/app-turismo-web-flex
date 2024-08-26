@@ -71,7 +71,7 @@ const updatePromotionById = (promotionId: number, promotionData: Promotion, dele
       console.log(responseDeleted);}
       
       const responseUpdate = await axios.put(`${URL}/promotions/${promotionId}`, promotionData);
-      console.log("respuesta de la actualizacion",responseUpdate.data);
+      // console.log("respuesta de la actualizacion",responseUpdate.data);
       
       dispatch(updatePromotion(responseUpdate.data));
     } catch (error) {
@@ -88,7 +88,7 @@ const deletePromotionById = (promotionId: number, status: any) => {
     try {
 
       const responseUpdate = await axios.put(`${URL}/promotions/${promotionId}`, {status_id:status[0].id});
-      console.log("respuesta de la eliminacion",responseUpdate);
+      // console.log("respuesta de la eliminacion",responseUpdate);
       
       dispatch(updatePromotion(responseUpdate.data));
     } catch (error) {

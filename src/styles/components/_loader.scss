@@ -5,13 +5,13 @@
     align-items: center;
     min-height: 100vh; 
     width: 100vw;
-    background-color: rgba(92, 92, 92, 0.379);
-    z-index: 10;
+    background-color: rgba(27, 27, 27, 0.487);
+    z-index: 15;
 }
 
 .loader {
     color: var(--secundary-color);
-    font-size: 40px;
+    font-size: 30px;
     text-indent: -9999em;
     overflow: hidden;
     width: 1em;

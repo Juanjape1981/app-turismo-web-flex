@@ -1,110 +1,173 @@
 .modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: rgba(0, 0, 0, 0.5);
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
-    z-index: 1;
-  }
-  
-  .modal.open {
-    opacity: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+
+  &.open {
     visibility: visible;
+    opacity: 1;
+    transition: opacity 0.3s ease;
   }
-  
+
+  &.closed {
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
   .modal-content {
     background-color: #fff;
     padding: 20px;
-    border-radius: 8px;
-    width: 90%;
-    max-width: 600px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    width: 60%;
+    max-height: 80vh;
+    overflow-y: auto;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    .divHeader{
+      width: 100%;
+      margin-bottom: 30px;
+    }
+    .iconos {
+      position: absolute;
+      width: 50px;
+      margin-bottom: 20px;
+      align-self: center;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .form-section {
+      margin-bottom: 20px;
+      width: 65%;
+      h3 {
+        margin-bottom: 15px;
+        font-size: 18px;
+        font-weight: bold;
+      }
+
+      // Contenedor para las dos columnas
+      .form-columns {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        // Cada columna
+        .column {
+          flex: 1;
+          min-width: calc(50% - 15px);
+        }
+        input,
+        select {
+          width: 100%;
+          padding: 10px;
+          margin-bottom: 10px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+          font-size: 16px;
+        }        
+      }
+    }
+
+    button {
+      width: 30%;
+      padding: 12px;
+      margin-top: 10px;
+      border: none;
+      border-radius: 5px;
+      background-color: var(--secundary-color);
+      color: #fff;
+      font-size: 16px;
+      cursor: pointer;
+      &:hover {
+        background-color: var(--blueSoft-color);
+      }
+    }
+    .form-section3 {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 20px;
+      width: 30%;
+      label {
+        display: flex;
+        align-items: center;
+        font-size: 16px;
+
+        input[type="checkbox"] {
+          margin-right: 10px;
+        }
+      }
+      .checkbox-group {
+        h4 {
+          margin-bottom: 10px;
+          font-size: 16px;
+        }
+
+        label {
+          display: block;
+          margin-bottom: 5px;
+        }
+      }
+    }
+    button:last-of-type {
+      background-color: #6c757d;
+
+      &:hover {
+        background-color: #5a6268;
+      }
+    }
   }
-  
-  h2 {
-    margin-bottom: 20px;
-    text-align: center;
-    color: #333;
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .modal-content {
+    max-width: 90%;
+
+    .form-columns {
+      flex-direction: column;
+
+      .column {
+        min-width: 100%;
+      }
+    }
   }
-  
-  .form-section {
-    margin-bottom: 20px;
+}
+.passwordDiv{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  & input{
+    width: 45% !important;
   }
-  
-  .form-section h3 {
-    margin-bottom: 10px;
-    font-size: 18px;
-    color: #555;
-  }
-  
-  input[type="text"],
-  input[type="email"],
-  input[type="password"],
-  input[type="date"],
-  input[type="url"],
-  select {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
-  }
-  
-  input[type="checkbox"] {
-    margin-right: 10px;
-  }
-  
-  label {
-    font-size: 14px;
-    color: #555;
-  }
-  
-  .checkbox-group {
-    margin-bottom: 20px;
-  }
-  
-  .checkbox-group h4 {
-    margin-bottom: 10px;
-    font-size: 16px;
-    color: #555;
-  }
-  
-  button {
-    width: 300px;
-    padding: 10px;
-    margin-top: 10px;
-    border: none;
-    border-radius: 4px;
-    background-color: var(--secundary-color);
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    align-self: center;
-    margin-bottom: 10px;
-  }
-  
-  button:hover {
-    background-color: var(--blueSoft-color);
-  }
-  
-  button + button {
-    background-color: #ccc;
-    margin-top: 0;
-  }
-  
-  button + button:hover {
-    background-color: #999;
-  }
-  
+}
+.cont_form-section{
+  width: 90%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.btnsDiv{
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+}
+hr {
+  flex-grow: 1;
+  height: 1px;
+  background-color: #b9b9b961;
+  border: none;
+  margin-left: 10px;
+  margin-right: 0;
+}
