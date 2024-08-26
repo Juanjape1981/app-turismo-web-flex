@@ -160,9 +160,9 @@ const UserManagement = () => {
             <div className='divbtnreg'>
             <button className='btnRegister' onClick={openModal}>
             <img src={MarketStall} className='iconos' />Registrar Asociado</button>    
+            <h1>Gestión de Usuarios</h1>
             </div>
             
-            <h1>Gestión de Usuarios</h1>
            {isModalOpen && <RegisterPartnerModal isOpen={isModalOpen} onClose={closeModal} />}
             
             {/* Filtros */}

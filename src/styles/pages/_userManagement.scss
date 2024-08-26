@@ -16,7 +16,11 @@
         flex-wrap: wrap; // Permite que los filtros se ajusten en pantallas pequeñas
         justify-content: space-between;
         margin-bottom: 15px;
-        align-items: center; // Alinea verticalmente los elementos
+        align-items: center;
+        @media (max-width: 768px) {
+            justify-content: center;    
+        }
+        
     }
 
     & .inputFilter {
@@ -195,6 +199,7 @@
         width: 100%;
        display: flex;
        justify-content: center;
+       flex-direction: column-reverse;
     }
 }
 .btnRegister {
