@@ -157,13 +157,13 @@ const UserManagement = () => {
     };
     return (
         <div className="user-management">
+           
             <div className='divbtnreg'>
             <button className='btnRegister' onClick={openModal}>
             <img src={MarketStall} className='iconos' />Registrar Asociado</button>    
             <h1>Gestión de Usuarios</h1>
             </div>
             
-           {isModalOpen && <RegisterPartnerModal isOpen={isModalOpen} onClose={closeModal} />}
             
             {/* Filtros */}
             <div className="filters">
@@ -234,6 +234,7 @@ const UserManagement = () => {
                     </li>
                 ))}
             </ul>
+            {isModalOpen && <RegisterPartnerModal isOpen={isModalOpen} onClose={closeModal} />}
         </div>
     );
 };

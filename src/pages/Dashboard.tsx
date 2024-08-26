@@ -12,7 +12,7 @@ const Dashboard = () => {
             if (user) {
             // return <PartnerDetail />;
         }
-        return <div>Actualización versión 23/08/2024</div>;
+        return <div>Actualización versión 25/08/2024</div>;
     };
 
     return (

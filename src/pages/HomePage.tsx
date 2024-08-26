@@ -9,7 +9,7 @@ const HomePage = () => {
 
   return (
     <div className="home">
-      <h1>Welcome to My App</h1>
+      <div>Actualización versión 25/08/2024</div>;
       <p>This is the home page.</p>
     </div>
   );
