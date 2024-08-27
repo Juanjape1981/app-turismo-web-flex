@@ -7,6 +7,8 @@ import { updateUser } from '../../redux/actions/userActions';
 import {updatePartner} from '../../redux/actions/partnerActions'
 import { RootState } from '../../redux/store/store';
 import { compressAndConvertToBase64 } from '../../utils/imageUtils';
+import { Card, CardContent } from '@mui/material';
+import withReactContent from 'sweetalert2-react-content';
 
 interface PartnerCardProps {
     partner: Partner;
@@ -33,7 +35,7 @@ const [imagePreview, setImagePreview] = useState(partner.user.image_url || '');
   });
 
   const [isEditing, setIsEditing] = useState(false);
-  const [originalData, setOriginalData] = useState({ ...formData });
+  const originalData = { ...formData };
 
   const handleChange = (e:any) => {
     const { name, value, type, checked } = e.target;
@@ -135,11 +137,76 @@ const [imagePreview, setImagePreview] = useState(partner.user.image_url || '');
         }
     }
 };
+const MySwal = withReactContent(Swal);
+const handlePasswordChange = () => {
+  MySwal.fire({
+    title: 'Cambiar Contraseña',
+    html: `
+      <input type="password" id="currentPassword" class="swal2-input" placeholder="Contraseña actual">
+      <input type="password" id="newPassword" class="swal2-input" placeholder="Nueva contraseña">
+      <input type="password" id="confirmNewPassword" class="swal2-input" placeholder="Confirmar nueva contraseña">
+    `,
+    showCancelButton: true,
+    confirmButtonText: 'Cambiar',
+    preConfirm: () => {
+      const currentPassword = (Swal.getPopup()!.querySelector('#currentPassword') as HTMLInputElement).value;
+      const newPassword = (Swal.getPopup()!.querySelector('#newPassword') as HTMLInputElement).value;
+      const confirmNewPassword = (Swal.getPopup()!.querySelector('#confirmNewPassword') as HTMLInputElement).value;
 
+      if (!currentPassword || !newPassword || !confirmNewPassword) {
+        Swal.showValidationMessage('Por favor, completa todos los campos');
+      } else if (newPassword !== confirmNewPassword) {
+        Swal.showValidationMessage('Las nuevas contraseñas no coinciden');
+      } else {
+        return { currentPassword, newPassword };
+      }
+    }
+  }).then(async (result:any) => {
+    if (result.isConfirmed) {
+      const { currentPassword, newPassword } = result.value!;
+      // Lógica para manejar el cambio de contraseña
+      const userData ={
+        user_id: partner.user.user_id,
+        data:{
+            password: newPassword,
+            current_password: currentPassword
+        }
+      }
+      const response = await dispatch(updateUser(userData))
+    //   console.log("respuesta de actualizacion", response);
+    //   console.log('Contraseña actual:', currentPassword);
+    //   console.log('Nueva contraseña:', newPassword);
+      if (response?.status == 200) {
+        Swal.fire({
+          icon: "success",
+          title: "¡Contraseña cambiada!",
+          text: "Tu contraseña ha sido modificada exitosamente.",
+        }).then(() => {
+        });
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: "No se pudo cambiar la contraseña. Intenta nuevamente.",
+        });
+      }
+    }
+  });
+};
   return (
     <div className="partner-card">
       <div className="three-columns">
         <div className="column-avatar">
+        <Card>
+                         <CardContent>
+                             <div className='passwordIcon' title='Cambiar contraseña' onClick={handlePasswordChange}>
+                                 <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 16 16">
+                                    <g fill="currentColor">
+                                       <path d="M0 8a4 4 0 0 1 7.465-2H14a.5.5 0 0 1 .354.146l1.5 1.5a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0L13 9.207l-.646.647a.5.5 0 0 1-.708 0L11 9.207l-.646.647a.5.5 0 0 1-.708 0L9 9.207l-.646.647A.5.5 0 0 1 8 10h-.535A4 4 0 0 1 0 8m4-3a3 3 0 1 0 2.712 4.285A.5.5 0 0 1 7.163 9h.63l.853-.854a.5.5 0 0 1 .708 0l.646.647l.646-.647a.5.5 0 0 1 .708 0l.646.647l.646-.647a.5.5 0 0 1 .708 0l.646.647l.793-.793l-1-1h-6.63a.5.5 0 0 1-.451-.285A3 3 0 0 0 4 5" />
+                                        <path d="M4 8a1 1 0 1 1-2 0a1 1 0 0 1 2 0" />
+                                    </g>
+                                </svg>
+                             </div>
         <div className="profile-imageEdit">
             <label  htmlFor="file-input">
                   <div className='divUpdateimg'>
@@ -157,6 +224,8 @@ const [imagePreview, setImagePreview] = useState(partner.user.image_url || '');
               />}   
             <p>{partner.user.email}</p>
             </div>
+                        </CardContent>
+                 </Card>
           {/* <img src={partner.user.image_url} alt={`${partner.user.first_name} ${partner.user.last_name}`} /> */}
 
 

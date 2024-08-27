@@ -3,7 +3,6 @@ import { useAppDispatch, useAppSelector } from '../redux/store/hooks';
 import { RootState } from '../redux/store/store';
 import '../styles/pages/UserProfile.scss';
 import { formatDateTo_DD_MM_AAAA, formatDateTo_YYYY_MM_DD } from '../utils/dateUtils';
-import { useSelector } from 'react-redux';
 import { fetchCountries } from '../redux/actions/globalDataActions';
 import { updateUser } from '../redux/actions/userActions';
 import Swal from 'sweetalert2';
