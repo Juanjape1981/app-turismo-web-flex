@@ -1,0 +1,87 @@
+// Variables para colores y tamaños
+$background-color: #f0f0f0;
+$error-color: #ffcccc;
+$text-color: #333;
+$loading-font-size: 1.5rem;
+$error-font-size: 1.5rem;
+
+// Contenedor principal del mapa
+.map-container {
+  width: 100%;
+  height: 100vh; 
+  position: relative;
+  background-color: $background-color;
+}
+
+// Estilos para el mapa de Google en sí
+#map {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+// Mensaje de carga mientras se carga el mapa
+.loading-message {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: $background-color;
+  font-size: $loading-font-size;
+  color: $text-color;
+}
+
+// Mensaje de error si hay un problema al cargar el mapa
+.error-message {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: $error-color;
+  color: var(--red-color);
+  font-size: $error-font-size;
+}
+
+// Botón de volver atrás
+.back-button {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  padding: 10px 15px;
+  background-color: $text-color;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  z-index: 10;
+
+  &:hover {
+    background-color: darken($text-color, 10%);
+  }
+}
+
+// InfoWindow de Google Maps
+.google-maps-info-window {
+  padding: 10px;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+  font-size: 0.9rem;
+  color: $text-color;
+}
+
+// Marcadores personalizados
+.custom-marker {
+  width: 30px;
+  height: 30px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 50%;
+  border: 2px solid white;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  z-index: 5;
+}

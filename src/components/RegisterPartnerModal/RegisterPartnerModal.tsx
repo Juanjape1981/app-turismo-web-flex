@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { createUser, assignRoleToUser } from '../../redux/actions/userActions';
+import { assignRoleToUser, createPartnerUser } from '../../redux/actions/userActions';
 import Swal from 'sweetalert2';
 import '../../styles/components/_RegisterPartnerModal.scss';
 import { useAppDispatch } from '../../redux/store/hooks';
@@ -100,7 +100,7 @@ console.log("categorias",categories);
       const { address, contact_info, business_type, category_ids,confirmPassword, ...userForm } = formData;
       console.log("formData en la creacion ",formData);
 
-      const createdUserAction = await dispatch(createUser(userForm));
+      const createdUserAction = await dispatch(createPartnerUser(userForm));
       console.log("created user en payload",createdUserAction);
       
       const rolAssociated = roles?.find(rol=> rol.role_name == "associated")
@@ -152,6 +152,13 @@ console.log("categorias",categories);
     }
   };
 
+  const areRequiredFieldsFilled = () => {
+    const { first_name, last_name, email, country, password, confirmPassword } = formData;
+    const allRequiredFieldsFilled = first_name && last_name && email && country && password && confirmPassword;
+    const passwordsMatch = password === confirmPassword;
+    return allRequiredFieldsFilled && passwordsMatch;
+  };
+
   return (
     <div className={`modal ${isOpen ? 'open' : ''}`}>
        {loading && <Loader />}
@@ -170,21 +177,21 @@ console.log("categorias",categories);
           <input
             type="text"
             name="first_name"
-            placeholder="Nombre"
+            placeholder="* Nombre"
             value={formData.first_name}
             onChange={handleChange}
           />
           <input
             type="text"
             name="last_name"
-            placeholder="Apellido"
+            placeholder="* Apellido"
             value={formData.last_name}
             onChange={handleChange}
           />
           <input
             type="email"
             name="email"
-            placeholder="Email"
+            placeholder="* Email"
             value={formData.email}
             onChange={handleChange}
           />
@@ -202,7 +209,7 @@ console.log("categorias",categories);
             value={formData.country}
             onChange={handleChange}
           >
-            <option value="">Seleccione un país</option>
+            <option value="">* Seleccione un país</option>
             {countries.map((country: any) => (
               <option key={country.code} value={country.name}>
                 {country.name}
@@ -237,19 +244,6 @@ console.log("categorias",categories);
         </div>
         
       </div>
-      {/* <label>
-        <input
-          type="checkbox"
-          name="subscribed_to_newsletter"
-          checked={formData.subscribed_to_newsletter}
-          onChange={handleChange}
-        />
-        Suscribirse al boletín
-      </label> */}
-    {/* </div>
-
-    <div className="form-section"> */}
-      {/* <h3>Información del Partner</h3> */}
       <div className="form-columns">
         <div className="column">
           
@@ -264,7 +258,7 @@ console.log("categorias",categories);
         <input
             type="email"
             name="contact_info"
-            placeholder="Correo de la empresa"
+            placeholder="Información de contacto"
             value={formData.contact_info}
             onChange={handleChange}
           />
@@ -272,14 +266,14 @@ console.log("categorias",categories);
   <input
     type="password"
     name="password"
-    placeholder="Contraseña"
+    placeholder="* Contraseña"
     value={formData.password}
     onChange={handleChange}
   />
   <input
     type="password"
     name="confirmPassword"
-    placeholder="Confirmar Contraseña"
+    placeholder="* Confirmar Contraseña"
     value={formData.confirmPassword}
     onChange={handleChange}
   />
@@ -307,9 +301,10 @@ console.log("categorias",categories);
         </div>
         </div>
        </div>
+       <p>* Datos obligatorios</p>
        <div className='btnsDiv'>
-          <button onClick={handleSubmit}>Registrar Asociado</button>
-          <button onClick={onClose}>Cancelar</button>
+          <button className={!areRequiredFieldsFilled()? 'inactive':'active'} onClick={ handleSubmit} disabled={!areRequiredFieldsFilled()}>Registrar Asociado</button>
+          <button className='cancel' onClick={onClose}>Cancelar</button>
        </div>
   </div>
 </div>

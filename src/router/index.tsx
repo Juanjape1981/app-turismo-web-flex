@@ -135,7 +135,7 @@ export const routes: RouteProps[] = [
     },
     {
         path: "/socioPerfil",
-        element: lazy(async () => await import("../pages/UnderConstruction")),
+        element: lazy(async () => await import("../pages/PartnerDetail")),
         name: "Reports",
         layout: lazy(async () => await import("../pages/Layout/layout")),
         authorization: {
@@ -155,6 +155,15 @@ export const routes: RouteProps[] = [
         path: "/partner",
         element: lazy(async () => await import("../pages/PartnerDetail")),
         name: "Sucursales",
+        layout: lazy(async () => await import("../pages/Layout/layout")),
+        authorization: {
+            allowedRoles: ['admin', 'tourist', 'associated']
+        }
+    },
+    {
+        path: "/new-branch",
+        element: lazy(async () => await import("../pages/CreateBranchPage")),
+        name: "Crear-Sucursal",
         layout: lazy(async () => await import("../pages/Layout/layout")),
         authorization: {
             allowedRoles: ['admin', 'tourist', 'associated']

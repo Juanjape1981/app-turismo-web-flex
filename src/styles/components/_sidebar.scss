@@ -8,7 +8,7 @@
       width: 100%;
     }
     @media (max-width: 480px) {
-      margin-top: 100px;
+      margin-top: 200px;
   }
 }
 .logOut {
@@ -18,7 +18,7 @@
   display: flex;
   position: absolute;
     width: 70px;
-    align-items: center;
+    align-items: flex-start;
     height: 100vh;
     background-color: #e8e8e8c1;
     transition: width 0.5s;
@@ -33,14 +33,18 @@
       height: 100%;
       top: 0;
   }
-  &.cont{
+  & .cont{
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 100%;
   }
   &:hover {
       width: 200px;
       display: flex;
+      z-index: 1;
+      align-items: flex-start;
+      // height: 100%;
       & .logOut {
         align-self: center;
         display: flex;
@@ -78,7 +82,10 @@
       text-align: center;
       color: var(--secundary-color);
       cursor: pointer;
-  
+      @media (max-width: 568px) {
+        margin-left: 0px;
+        padding: 10px 0;
+      }
       &:hover .sidebar-text {
         color: var(--primary-color);
       }
@@ -149,7 +156,7 @@
       // width: 200px;
       display: flex;
       // Inicialmente transparente
-        
+      
         opacity: 1;
         transition: opacity 0.5s ease;
     }

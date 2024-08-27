@@ -123,6 +123,22 @@ const createUser = (userData: CreateUserModel) => {
     try {
       const response = await axios.post(`${URL}/signup`, userData);
       // dispatch(setUsers(response.data));
+      // console.log("respuesta del registro", response);
+      
+      return response.data;
+    } catch (error) {
+      console.error("Error al crear un nuevo usuario:", error);
+      throw error;
+    }
+  };
+};
+//crear asociado
+// Crear un nuevo usuario
+const createPartnerUser = (userData: CreateUserModel) => {
+  return async () => {
+    try {
+      const response = await axios.post(`${URL}/signup-partner`, userData);
+      // dispatch(setUsers(response.data));
       console.log("respuesta del registro", response);
       
       return response.data;
@@ -132,6 +148,7 @@ const createUser = (userData: CreateUserModel) => {
     }
   };
 };
+
 const fetchAllUsers = () => async (dispatch: Dispatch, getState: () => RootState) => {
   const { accessToken } = getState().user; // Obtener el token del estado global
 
@@ -216,4 +233,4 @@ const assignRoleToUser = (data: { role_ids: number[]; user_id: number; }) => {
 
 
 
-export { userLogIn, logOutUser,resetPassword,fetchAllUsers, fetchRoles, fetchStatuses, updateUser, assignRoleToUser, createUser };
+export { userLogIn, logOutUser,resetPassword,fetchAllUsers, fetchRoles, fetchStatuses, updateUser, assignRoleToUser, createUser, createPartnerUser };

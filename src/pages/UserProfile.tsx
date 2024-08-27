@@ -7,10 +7,11 @@ import { useSelector } from 'react-redux';
 import { fetchCountries } from '../redux/actions/globalDataActions';
 import { updateUser } from '../redux/actions/userActions';
 import Swal from 'sweetalert2';
+import { compressAndConvertToBase64 } from '../utils/imageUtils';
 
 const UserProfile = () => {
   const { userData } = useAppSelector((state: RootState) => state.user);
-  const countries = useSelector((state: RootState) => state.globalData.countries);
+  const countries = useAppSelector((state: RootState) => state.globalData.countries);
   const user = userData as any;
    console.log(user.birth_date);
    const dispatch = useAppDispatch();
@@ -44,18 +45,25 @@ const UserProfile = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        const base64String = reader.result as string;
-        setFormData({ ...formData, image_data: base64String });
-        setImagePreview(base64String);
-      };
-      reader.readAsDataURL(file);
+        try {
+            const base64String = await compressAndConvertToBase64(file); // Comprimir y convertir a base64
+            const base64Data = base64String.replace(/^data:image\/[a-z]+;base64,/, "");
+            setFormData({ ...formData, image_data: base64Data });
+            setImagePreview(base64String);
+        } catch (error) {
+            console.error('Error al procesar la imagen:', error);
+            Swal.fire({
+                title: 'Error',
+                text: 'No se pudo procesar la imagen',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+        }
     }
-  };
+};
   const Toast = Swal.mixin({
     toast: true,
     position: "center",
@@ -105,9 +113,6 @@ console.log("todos los paises", countries);
         {isEditing ? (
           <div className="profile-data">
             <div className="profile-imageEdit">
-              
-
-              
             <label  htmlFor="file-input">
                   <div className='divUpdateimg'>
                      <svg xmlns="http://www.w3.org/2000/svg" width="2.5em" height="2.5em" viewBox="0 0 24 24"><g fill="none" stroke="white" strokeLinecap="round" strokeWidth="1.5"><path strokeLinejoin="round" d="M21.25 13V8.5a5 5 0 0 0-5-5h-8.5a5 5 0 0 0-5 5v7a5 5 0 0 0 5 5h6.26"/><path strokeLinejoin="round" d="m3.01 17l2.74-3.2a2.2 2.2 0 0 1 2.77-.27a2.2 2.2 0 0 0 2.77-.27l2.33-2.33a4 4 0 0 1 5.16-.43l2.47 1.91M8.01 10.17a1.66 1.66 0 1 0-.02-3.32a1.66 1.66 0 0 0 .02 3.32"/><path strokeMiterlimit="10" d="M18.707 15v5"/><path strokeLinejoin="round" d="m21 17.105l-1.967-1.967a.458.458 0 0 0-.652 0l-1.967 1.967"/></g>
@@ -115,7 +120,6 @@ console.log("todos los paises", countries);
                   </div>   
               <img src={imagePreview} alt="User" />
           </label>
-            
               <input
                 type="file"
                 id="file-input"

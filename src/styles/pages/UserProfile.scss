@@ -154,6 +154,9 @@
 .profile-imageEdit{
   width: 150px;
   height: 150px;
+  @media (max-width: 568px) {
+    height: auto;
+  }
   & label{
     display: flex;
     justify-content: center;

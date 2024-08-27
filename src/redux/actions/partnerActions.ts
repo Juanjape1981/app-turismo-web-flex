@@ -32,6 +32,22 @@ const fetchPartnerById = (partnerId: number) => {
   };
 };
 
+// actualizar datos de un Partner por ID
+const updatePartner = (partnerId: number, data: any) => {
+  return async (dispatch: Dispatch) => {
+    try {
+      // Incluye `data` en la solicitud `PUT`
+      const response = await axios.put(`${URL}/partners/${partnerId}`, data);
+      console.log("respuesta partner",response);
+      
+      dispatch(setPartnerData(response.data));
+      return response
+    } catch (error) {
+      console.error(`Error al actualizar los datos del partner ${partnerId}:`, error);
+      throw error; // Re-lanzar el error para manejarlo en el componente si es necesario
+    }
+  };
+};
 // Crear una nueva sucursal para un Partner
 const createBranch = (partnerId: number, branchData: Branch) => {
   return async (dispatch: Dispatch) => {
@@ -79,4 +95,4 @@ const selectBranch = (branch: Branch | null) => {
   };
 };
 
-export { fetchPartnerById, createBranch, updateBranchById, deleteBranchById, selectBranch, createPartner };
+export { fetchPartnerById, createBranch, updateBranchById, deleteBranchById, selectBranch, createPartner, updatePartner };

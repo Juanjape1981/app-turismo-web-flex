@@ -1,83 +1,219 @@
 .partner-detail {
-    padding: 20px;
-    background-color: var(--tertiary-color);
-    font-family: var(--font-poppins);
-  
-    .MuiTypography-h4 {
-      font-size: 2rem;
-      font-weight: 600;
-      margin-bottom: 20px;
-      color: var(--black-color);
+  padding: 20px;
+  background-color: #f9f9f9;
+  height: 100%;
+  padding-left: 5%;
+  h4 {
+    font-size: 1.6rem;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: left;
+    margin-left: 5%;
+  }
+
+  .partner-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px;
+    height: 50%;
+    
+    @media (max-width: 768px) {
+      height: auto;
     }
-  
+
     .MuiCard-root {
-      border-radius: var(--balloon-border-radius);
+      width: 100%;
+      max-width: 500px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      margin-bottom: 20px;
-      background-color: var(--white-color);
+      border-radius: 8px;
+      background-color: #fff;
       padding: 20px;
-  
-      .MuiAvatar-root {
-        width: 100px;
-        height: 100px;
-        margin-bottom: 10px;
-        border: 2px solid var(--blue-light-color);
+      text-align: center;
+      transition: transform 0.3s ease;
+      &:hover {
+        transform: translateY(-5px);
       }
-  
+
+      .MuiAvatar-root {
+        width: 80px;
+        height: 80px;
+        margin: 0 auto 15px;
+        border: 2px solid var(--secundary-color);
+      }
+      
       .MuiTypography-h6 {
         font-size: 1.5rem;
-        color: var(--black-color);
-        font-weight: 500;
+        color: #333;
+        margin-bottom: 10px;
       }
-  
-      .MuiTypography-body1,
-      .MuiTypography-body2 {
-        color: var(--black-color);
-        margin-bottom: 8px;
+
+      .MuiTypography-body1 {
+        font-size: 1rem;
+        color: #333;
+        margin-bottom: 5px;
       }
-  
+    }
+  }
+
+  .branch-section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      margin-left: 10%;
+      margin-bottom: 20px;
+
+    }
+    .btn_newBranch{
+      display: flex;
       .MuiButton-containedPrimary {
-        background-color: var(--primary-color);
-        color: #fff;
-        &:hover {
-          background-color: var(--primary-color);
-        }
-      }
-  
-      .MuiButton-outlinedPrimary {
-        border-color: var(--primary-color);
-        color: var(--primary-color);
-        &:hover {
-          background-color: rgba(var(--primary-color), 0.1);
-        }
-      }
-  
-      .MuiButton-outlinedSecondary {
-        border-color: var(--secundary-color);
-        color: var(--secundary-color);
-        &:hover {
-          background-color: rgba(var(--secundary-color), 0.1);
-        }
-      }
-  
-      .branch-card {
         display: flex;
         flex-direction: column;
-        align-items: flex-start;
-        padding: 15px;
-        margin-bottom: 10px;
+        justify-content: space-evenly;
+        background-color: var(--primary-color);
+        // color: var(--primary-color);
+        font-size: medium;
+        // transition: all 0.3s;
+        & svg{
+          margin-right: 10px;
+        }
+        &:hover {
+          background-color: var(--orangeSoft-color);
+          color: #fff;
+        }
+      }
+    }
+
+    .branch-list {
+      display: flex;
+      flex-wrap: wrap;
+      margin-left: 2%;
+      gap: 20px;
+
+      .branch-card {
+        flex: 1 1 300px;
+        max-width: 300px;
         cursor: pointer;
-        border: 1px solid var(--grey-color);
-        border-radius: var(--balloon-border-radius);
-        background-color: var(--white-color);
-  
-        .MuiButton {
+        .MuiCardContent-root {
+          padding-bottom: 20px;
+        }
+        .MuiButton-root {
+          margin-top: 10px;
+          font-size: 0.9rem;
+          &:first-of-type {
+            margin-right: 10px;
+          }
+        }
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    padding: 10px;
+
+    h4 {
+      font-size: 1.75rem;
+    }
+
+    .partner-info {
+      .MuiCard-root {
+        max-width: 100%;
+      }
+    }
+
+    .branch-section {
+      .section-header {
+        flex-direction: column;
+        align-items: center;
+
+        .MuiButton-containedPrimary {
           margin-top: 10px;
         }
       }
-    }
-  
-    .MuiGrid-container {
-      margin-top: 20px;
+
+      .branch-list {
+        .branch-card {
+          flex: 1 1 100%;
+          max-width: 100%;
+        }
+      }
     }
   }
+
+  @media (max-width: 480px) {
+    h4 {
+      font-size: 1.5rem;
+    }
+
+    .partner-info {
+      .MuiAvatar-root {
+        width: 60px;
+        height: 60px;
+      }
+
+      .MuiTypography-h6 {
+        font-size: 1.25rem;
+      }
+
+      .MuiTypography-body1 {
+        font-size: 0.9rem;
+      }
+    }
+
+    .branch-section {
+      .section-header {
+        .MuiButton-containedPrimary {
+          width: 100%;
+        }
+      }
+    }
+  }
+  & .btns_ed_del{
+    position: relative;
+    width: 100%;
+    .btnDelete{
+      width: 30px;
+      height: 30px;
+      min-width: 30px;
+      position:absolute;
+      right: 10px;
+      color: var(--red-color);
+      &:hover{
+        // background-color: var(--red-color);
+        color: var(--redSoft-color);
+      }
+    }
+    .btnEdit{
+      width: 30px;
+      height: 30px;
+      min-width: 30px;
+      padding: 0;
+      position:absolute;
+      right: 1.7em;
+      color: var(--secundary-color);
+      &:hover{
+        // background-color: var(--secundary-color);
+        color: var(--blueSoft-color);
+      }
+      // background-color: #333;
+    }
+  }
+}
+.passwordIcon{
+  position: relative;
+  & svg{
+    position: absolute;
+    right: 0;
+    top: 0;
+    color: var(--secundary-color);
+    cursor: pointer;
+      &:hover{
+        color: var(--primary-color);
+      }
+  }
+}

@@ -4,11 +4,14 @@ import App from './App.tsx'
 import './styles/index.scss'
 import { Provider } from 'react-redux'
 import { store } from './redux/store/store.ts'
+import { GoogleMapsProvider } from './components/MapFunctions/GoogleMapsLoader.tsx'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <Provider store={store}>
+    <GoogleMapsProvider>
     <App />
+    </GoogleMapsProvider>
     </Provider>
 </React.StrictMode>
 )

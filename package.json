@@ -13,6 +13,7 @@
     "@emotion/react": "^11.13.0",
     "@emotion/styled": "^11.13.0",
     "@mui/material": "^5.16.7",
+    "@react-google-maps/api": "^2.19.3",
     "@reduxjs/toolkit": "^2.2.6",
     "@types/react-router-dom": "^5.3.3",
     "app-turismo-web": "file:",
