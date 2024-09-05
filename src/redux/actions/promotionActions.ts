@@ -67,7 +67,7 @@ const updatePromotionById = (promotionId: number, promotionData: Promotion, dele
     const imgDelete = {'image_ids': deletedImageIds}
     try {
       if(deletedImageIds.length){
-        const responseDeleted= await axios.delete(`${URL}/promotion_images`,  { data: imgDelete } );
+        const responseDeleted= await axios.post(`${URL}/promotion_images/delete`, imgDelete );
       console.log(responseDeleted);}
       
       const responseUpdate = await axios.put(`${URL}/promotions/${promotionId}`, promotionData);

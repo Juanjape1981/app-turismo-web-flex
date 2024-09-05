@@ -32,10 +32,10 @@ const EditPromotionModal: React.FC<EditPromotionModalProps> = ({idPromo, isOpen,
     const categories = useAppSelector(state => state.globalData.categories); 
 
     console.log("estados",statuses);
-    console.log("categorias",categories);
+    // console.log("categorias",categories);
 
-    console.log("imagenes comprimidas",newImages);
-    console.log("imagenes eliminadas",deletedImageIds);
+    // console.log("imagenes comprimidas",newImages);
+    // console.log("imagenes eliminadas",deletedImageIds);
     
     useEffect(() => {
         if (promotion) {
