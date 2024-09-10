@@ -35,8 +35,12 @@ const Login = () => {
   });
 
   const onSubmit = (data: any) => {
+    const formattedData = {
+      ...data,
+      email: data.email.trim().toLowerCase(),
+    };
     setLoading(true);
-    dispatch(userLogIn(data, "")).then((resp) => {
+    dispatch(userLogIn(formattedData, "")).then((resp) => {
       setLoading(false);
         
       if (resp) {
@@ -107,7 +111,7 @@ const Login = () => {
                 <span className="form-error"> {(errors.password as FieldError).message}</span>
               )}
               <button type="submit" className="submit_button">Ingresar</button>
-              <Link to="/register" className="create-account-button">Crear cuenta</Link>
+              {/* <Link to="/register" className="create-account-button">Crear cuenta</Link> */}
             </form>
           </div>
         </div>

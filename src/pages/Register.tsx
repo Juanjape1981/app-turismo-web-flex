@@ -7,20 +7,20 @@ import { useState } from 'react';
 import logo from "../assets/logo.png";
 import logo2 from "../assets/logo2.png";
 
+// Actualiza el modelo para reflejar los nuevos campos
 interface UserRegister {
   email: string;
   password: string;
   confirmPassword?: string;
-  nombre: string;
-  apellido: string;
-  pais: string;
-  ciudad: string;
-  nro_telefono?: string;
-  sexo?: string;
+  first_name: string;
+  last_name: string;
+  country: string;
+  city: string;
+  phone_number?: string;
+  gender?: string;
   otro_genero?: string; 
-  fecha_nacimiento?: string;
-  suscrito_newsletter?: boolean;
-  categories?: number[];
+  birth_date?: string;
+  subscribed_to_newsletter?: boolean;
 }
 
 const Register = () => {
@@ -43,9 +43,13 @@ const Register = () => {
 
   const onSubmit = (data: UserRegister) => {
     const { confirmPassword, otro_genero, ...userData } = data;
+
+    userData.email = userData.email.trim().toLowerCase();
     if (otro_genero) {
-      userData.sexo = otro_genero;
+      userData.gender = otro_genero;
     }
+    console.log("data a enviar",userData);
+    // Enviar los datos al servidor con los nombres de campos correctos
     axios.post(`${URL}/signup`, userData).then((resp: any) => {
       Toast.fire({
         icon: "success",
@@ -55,7 +59,6 @@ const Register = () => {
       });
     }).catch((error) => {
       console.log(error);
-      
       Swal.fire({
         icon: "error",
         title: "Error",
@@ -74,7 +77,6 @@ const Register = () => {
     <div className="register-container">
       <div className="content">
         <div className="form-container">
-          {/* <h3>Súmate a nuestra comunidad:</h3> */}
           <div className="divLogoReg">
             <Link className="divLogoReg2" to="/">
               <img className="logoregister" src={logo} alt="logoregister" />
@@ -87,37 +89,37 @@ const Register = () => {
                 type="text"
                 placeholder="* Nombre"
                 className="form-input"
-                {...register("nombre", { required: "Nombre requerido" })}
+                {...register("first_name", { required: "Nombre requerido" })}
               />
-              {errors.nombre && (
-                <span className="form-error">{(errors.nombre as FieldError).message}</span>
+              {errors.first_name && (
+                <span className="form-error">{(errors.first_name as FieldError).message}</span>
               )}
               <input
                 type="text"
                 placeholder="* Apellido"
                 className="form-input"
-                {...register("apellido", { required: "Apellido requerido" })}
+                {...register("last_name", { required: "Apellido requerido" })}
               />
-              {errors.apellido && (
-                <span className="form-error">{(errors.apellido as FieldError).message}</span>
+              {errors.last_name && (
+                <span className="form-error">{(errors.last_name as FieldError).message}</span>
               )}
               <input
                 type="text"
                 placeholder="* País"
                 className="form-input"
-                {...register("pais", { required: "País requerido" })}
+                {...register("country", { required: "País requerido" })}
               />
-              {errors.pais && (
-                <span className="form-error">{(errors.pais as FieldError).message}</span>
+              {errors.country && (
+                <span className="form-error">{(errors.country as FieldError).message}</span>
               )}
               <input
                 type="text"
                 placeholder="* Ciudad"
                 className="form-input"
-                {...register("ciudad", { required: "Ciudad requerida" })}
+                {...register("city", { required: "Ciudad requerida" })}
               />
-              {errors.ciudad && (
-                <span className="form-error">{(errors.ciudad as FieldError).message}</span>
+              {errors.city && (
+                <span className="form-error">{(errors.city as FieldError).message}</span>
               )}
               <input
                 type="email"
@@ -138,16 +140,16 @@ const Register = () => {
                 type="text"
                 placeholder="Número de Teléfono"
                 className="form-input"
-                {...register("nro_telefono")}
+                {...register("phone_number")}
               />
               <select
                 className="form-input"
-                {...register("sexo")}
+                {...register("gender")}
                 onChange={handleGeneroChange}
               >
                 <option value="">Seleccione Género</option>
-                <option value="M">Masculino</option>
-                <option value="F">Femenino</option>
+                <option value="male">Masculino</option>
+                <option value="female">Femenino</option>
                 <option value="Otro">Otro</option>
               </select>
               {showOtroGenero && (
@@ -161,7 +163,7 @@ const Register = () => {
               <input
                 type="date"
                 className="form-input"
-                {...register("fecha_nacimiento")}
+                {...register("birth_date")}
               />
             </div>
             <div className="password-divider">
@@ -187,13 +189,6 @@ const Register = () => {
                 <span className="form-error">{(errors.confirmPassword as FieldError).message}</span>
               )}
             </div>
-            {/* <label className="form-checkbox">
-              <input
-                type="checkbox"
-                {...register("suscrito_newsletter")}
-              />
-              Suscrito a Newsletter
-            </label> */}
             <button type="submit" className="submit-button">Registrar</button>
             <p>* datos obligatorios para registrarse</p>
             <Link to="/login" className="already-account-button">Si ya tienes cuenta, ingresa aquí</Link>
