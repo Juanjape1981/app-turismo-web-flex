@@ -36,7 +36,9 @@ const AllPromotions = () => {
     const [endDateFilter, setEndDateFilter] = useState('');
     const [availableQuantityFilter, setAvailableQuantityFilter] = useState('');
     const [discountFilter, setDiscountFilter] = useState('');
-
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 5;
+    
 
     useEffect(() => {
         dispatch(fetchAllPromotions());
@@ -57,6 +59,8 @@ const AllPromotions = () => {
             (discountFilter === '' || promotion.discount_percentage >= parseFloat(discountFilter))
         );
     });
+    const totalPages = Math.ceil(filteredPromotions.length / itemsPerPage);
+    const paginatedPromotions = filteredPromotions.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
 
     const handleEdit = (promotion: PromotionUpdateModel) => {
         setSelectedPromotion(promotion);
@@ -98,7 +102,9 @@ const AllPromotions = () => {
         setAvailableQuantityFilter('');
         setDiscountFilter('');
     };
-
+    const handlePageChange = (newPage: number) => {
+        setCurrentPage(newPage);
+    };
     return (
         <div className="promotions-list">
             <div className='createPromotion'>
@@ -135,7 +141,7 @@ const AllPromotions = () => {
 
                 <input
                     type="number"
-                    placeholder="Cantidad disponible mínima"
+                    placeholder="Cantidad disponible"
                     value={availableQuantityFilter}
                     onChange={(e) => setAvailableQuantityFilter(e.target.value)}
                 />
@@ -160,17 +166,19 @@ const AllPromotions = () => {
                             <th className='align-center'>Fecha de Inicio</th>
                             <th className='align-center'>Fecha de Expiración</th>
                             <th className='align-center'>Cantidad Disponible</th>
+                            <th className='align-center'>Cantidad Consumidas</th>
                             <th className='align-center'>Descuento (%)</th>
                             <th className='align-center'>Acciones</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    {/* <tbody>
                         {filteredPromotions?.map((promotion: any) => (
                             <tr key={promotion.promotion_id}>
                                 <td>{promotion.title}</td>
                                 <td className='align-center'>{formatDateTo_DD_MM_AAAA(promotion.start_date)}</td>
                                 <td className='align-center'>{formatDateTo_DD_MM_AAAA(promotion.expiration_date)}</td>
-                                <td className='align-center'>{promotion.available_quantity}</td>
+                                <td className='align-center'>{promotion.available_quantity? promotion.available_quantity : 'Sin límite'}</td>
+                                <td className='align-center'>{promotion.consumed_quantity? promotion.consumed_quantity : 0}</td>
                                 <td className='align-center'>{promotion.discount_percentage}</td>
                                 <td>
 
@@ -181,11 +189,38 @@ const AllPromotions = () => {
                             </tr>
                         ))}
 
-                    </tbody>
+                    </tbody> */}
+                    <tbody>
+                            {paginatedPromotions.map((promotion: any) => (
+                                <tr key={promotion.promotion_id}>
+                                    <td>{promotion.title}</td>
+                                    <td className='align-center'>{formatDateTo_DD_MM_AAAA(promotion.start_date)}</td>
+                                    <td className='align-center'>{formatDateTo_DD_MM_AAAA(promotion.expiration_date)}</td>
+                                    <td className='align-center'>{promotion.available_quantity || 'Sin límite'}</td>
+                                    <td className='align-center'>{promotion.consumed_quantity || 0}</td>
+                                    <td className='align-center'>{promotion.discount_percentage}</td>
+                                    <td>
+                                    <button className="edit-btn2" onClick={() => handleEdit(promotion)}><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16"><path fill="currentColor" d="M16 4s0-1-1-2s-1.9-1-1.9-1L12 2.1V0H0v16h12V8zm-9.7 7.4l-.6-.6l.3-1.1l1.5 1.5zm.9-1.9l-.6-.6l5.2-5.2c.2.1.4.3.6.5zm6.9-7l-.9 1c-.2-.2-.4-.3-.6-.5l.9-.9c.1.1.3.2.6.4M11 15H1V1h10v2.1L5.1 9L4 13.1L8.1 12L11 9z" /></svg>
+                                    </button>
+                                    <button className="delete-btn" onClick={() => handleDelete(promotion.promotion_id)}><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 26 26"><path fill="currentColor" d="M11.5-.031c-1.958 0-3.531 1.627-3.531 3.594V4H4c-.551 0-1 .449-1 1v1H2v2h2v15c0 1.645 1.355 3 3 3h12c1.645 0 3-1.355 3-3V8h2V6h-1V5c0-.551-.449-1-1-1h-3.969v-.438c0-1.966-1.573-3.593-3.531-3.593zm0 2.062h3c.804 0 1.469.656 1.469 1.531V4H10.03v-.438c0-.875.665-1.53 1.469-1.53zM6 8h5.125c.124.013.247.031.375.031h3c.128 0 .25-.018.375-.031H20v15c0 .563-.437 1-1 1H7c-.563 0-1-.437-1-1zm2 2v12h2V10zm4 0v12h2V10zm4 0v12h2V10z" /></svg></button>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
                 </table>
                 </div>
             )}
-
+            <div className="pagination">
+                {Array.from({ length: totalPages }, (_, index) => (
+                    <button
+                        key={index + 1}
+                        className={currentPage === index + 1 ? 'active' : ''}
+                        onClick={() => handlePageChange(index + 1)}
+                    >
+                        {index + 1}
+                    </button>
+                ))}
+            </div>
             {selectedPromotion && (
                 <EditPromotionModal
                 idPromo={selectedPromotion.promotion_id}

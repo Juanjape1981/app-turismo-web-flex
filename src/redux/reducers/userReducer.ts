@@ -7,16 +7,16 @@ import Status from "../types/types";
 export interface UserState {
     userData: User | {};
     accessToken: string | null;
-    role: string | null;
-    users: User[] | null
-    roles: Role[] | null;
-    statuses: Status[] | null;
+    rolesUser: Role[] | null;
+    users: User[] | []
+    roles: Role[] | [];
+    statuses: Status[] | [];
 }
 
 const initialState: UserState = {
     userData: {},
     accessToken: null,
-    role: "admin",
+    rolesUser: null,
     users: [],
     roles: [],
     statuses: [],
@@ -31,12 +31,14 @@ const Slice = createSlice({
             return {
                 ...state,
                 userData: userData,
-                accessToken: token
+                accessToken: token,
+                rolesUser: userData.roles
             };
         },
         logOut: (state, action: PayloadAction<{}>) => {
             state.userData = action.payload;
             state.accessToken = null;
+            state.rolesUser = null;
         },
         setUsers: (state, action: PayloadAction<User[]>) => {
             state.users = action.payload;

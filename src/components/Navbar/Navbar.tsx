@@ -12,12 +12,16 @@ import logo2 from '../../assets/logo2.png'
 const Navbar: React.FC = () => {
     const userActive: UserState = useAppSelector((state: any) => state.user);
     const dispatch = useAppDispatch();
-
+    console.log("usuario activo navbar");
+    
     useEffect(() => {
         const token = Cookies.get("data");
+        console.log("token en navbar----",token);
+        
         if (token && !userActive.accessToken) {
             dispatch(userLogIn(null, token));
         }
+
     }, [dispatch, userActive.accessToken]);
 
     const isUser = (userData: any): userData is User => {

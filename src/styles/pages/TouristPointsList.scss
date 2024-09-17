@@ -1,0 +1,81 @@
+.tourist-points-list {
+    padding: 16px;
+    min-height: 100vh;
+    width: 95%;
+    margin-left: 5%;
+    .button-container {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+  
+    .add-button {
+      margin-bottom: 2%;
+      margin-top: 2%;
+      background-color: var(--primary-color);
+      justify-content: center;
+      &:hover{
+        background-color: var(--blueSoft-color);
+      }
+    }
+  
+    .tourist-point-card {
+        cursor: pointer;
+    transition: transform 0.2s ease;
+
+    &:hover {
+      transform: scale(1.02);
+    }
+      .card-image {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        @media (max-width: 600px) {
+            height: 120px;
+        }
+      }
+  
+      .card-content {
+        padding: 16px;
+      }
+    }
+  
+    .pagination {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+    }
+
+}
+@media (max-width: 600px) {
+    .tourist-points-list {
+      padding-left: 7%;
+
+      .add-button {
+        display: block;
+        margin: 0 auto 20px;
+      }
+  
+      .MuiGrid-container {
+        justify-content: center;
+      }
+    }
+}
+.nameRating{
+    width: 100%;
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+//   --primary-color: #007a8c;
+//   --primarySoft-color: #acd0d5;
+//   --secundary-color: #336749;
+//   --grey-color: #f6f6f6;
+
+
+//   --blueSoft-color: #008ba1;
+//   --blue-light-color: #64C9ED;

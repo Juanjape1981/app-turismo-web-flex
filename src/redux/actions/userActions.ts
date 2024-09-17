@@ -29,33 +29,56 @@ interface CreateUserModel {
   // image_url: string
 }
 const URL = import.meta.env.VITE_API_URL;
-//Post para login de user
+
 const userLogIn = (user: UserLogin | null, token: string) => {
   return async (dispatch: Dispatch) => {
-    if (!user && token.length) {
-      const decodedToken: CustomJwtPayload = await jwtDecode(token);
-      // console.log("decodedToken en JWT", decodedToken);
-      const userData: User = {
-        user_id: 0, 
-        first_name: '',
-        last_name: '',
-        country: '',
-        city: '',
-        birth_date: '',
-        email: decodedToken.email,
-        phone_number: '',
-        gender: '',
-        subscribed_to_newsletter: false,
-        status: {id:1,name:'',description:''},
-        token: token,
-        image_url: '',
-        exp: decodedToken.exp,
-        roles: []
-      };
-      const res = dispatch(loginUser(userData));
-      return res;
-    } else if (user && !token.length) {
-      try {
+    try {
+      
+      
+      if (!user && token.length) {
+        console.log("se envia token_____ user log",token);
+        const response = await axios.get(`${URL}/user`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        console.log("respuesta de se envia token____");
+        
+        const decodedToken: CustomJwtPayload = await jwtDecode(token);
+
+        const userData: User = {
+          user_id: response.data.user_id,
+          first_name: response.data.first_name,
+          last_name: response.data.last_name,
+          country: response.data.country,
+          city: response.data.city,
+          birth_date: response.data.birth_date,
+          email: response.data.email,
+          phone_number: response.data.phone_number,
+          gender: response.data.gender,
+          subscribed_to_newsletter: response.data.subscribed_to_newsletter,
+          status: response.data.status,
+          token: token,
+          image_url: response.data.image_url,
+          exp: decodedToken.exp,
+          roles: response.data.roles, // Obtenemos los roles del response
+        };
+
+        
+        const isAdmin = userData.roles.some(role => role.role_name === 'admin');
+
+        if (!isAdmin) {
+         return new Error("Usuario no autorizado");
+        }
+
+
+        Cookies.set("data", token, { expires: 3 });
+        // Despachamos la acción de loginUser
+        const res = dispatch(loginUser(userData));
+        return res;
+
+      // Si tenemos usuario pero no token, autenticamos con las credenciales
+      } else if (user && !token.length) {
         const response = await axios.post(`${URL}/login`, user);
         const decodedToken: CustomJwtPayload = await jwtDecode(response.data.token);
 
@@ -74,15 +97,26 @@ const userLogIn = (user: UserLogin | null, token: string) => {
           token: response.data.token,
           image_url: response.data.user.image_url,
           exp: decodedToken.exp,
-          roles:  response.data.user.roles
+          roles: response.data.user.roles,
         };
 
+        // Verificamos si el rol es 'admin'
+        const isAdmin = userData.roles.some(role => role.role_name === 'admin');
+
+        if (!isAdmin) {
+          // Si no es admin, devolvemos un error
+          return Error("Usuario no autorizado");
+        }
+
+        // Guardamos el token en las cookies si es admin
         Cookies.set("data", response.data.token, { expires: 3 });
+        // Despachamos la acción de loginUser
         const res = dispatch(loginUser(userData));
         return res;
-      } catch (error) {
-        console.error("Error al iniciar sesión:", error);
       }
+    } catch (error) {
+      console.error("Error al iniciar sesión:", error);
+      throw error; // Devolvemos el error para que sea manejado en el componente
     }
   };
 };

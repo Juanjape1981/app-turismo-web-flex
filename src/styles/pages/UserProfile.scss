@@ -1,11 +1,12 @@
 .user-profile-container {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items:flex-start;
   min-height: 100vh;
   background-color: #f9f9f9;
 
   .profile-card {
+    margin-top: 10%;
     background: #ffffff;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -113,7 +114,7 @@
         background-color: var(--primary-color);
         color: #fff;
         &:hover{
-          background-color: var(--orangeSoft-color);
+          background-color: var(--blueSoft-color);
         }
       }
 
@@ -129,7 +130,7 @@
     .edit-button {
       margin-top: 20px;
       padding: 10px 20px;
-      background-color: var(--secundary-color);
+      background-color: var(--primary-color);
       color: #fff;
       border: none;
       border-radius: 5px;

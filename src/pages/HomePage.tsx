@@ -4,7 +4,7 @@ import '../styles/pages/Home.scss';
 
 const HomePage = () => {
   const { userData, accessToken } = useAppSelector((state: RootState) => state.user);
-  console.log(userData, accessToken);
+  console.log("componente home",userData, accessToken);
 
 
   return (

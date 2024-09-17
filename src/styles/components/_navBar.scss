@@ -1,8 +1,8 @@
 .navbar {
-    background: linear-gradient(45deg, #e9e9e9, #cbcbcbbd);
+    background: linear-gradient(45deg, var(--primary-color), var(--primarySoft-color));
     width: 100%;
     display: flex;
-    box-shadow: 2px 2px 2px 0px rgba(186,171,186,1);
+    box-shadow: 2px 1px 1px 0px var(--primary-color);
     // flex-wrap: wrap;
     flex-direction: row;
     align-content: center;
@@ -39,7 +39,7 @@
   .navbar-list {
     font-family: var(--font-robotoFlex);
     width: 80%;
-    color:  var(--secundary-color);
+    color:  var(--grey-color);
     list-style: none;
     padding: 0;
     margin: 0;
@@ -66,7 +66,7 @@
         .navbar-item { 
           display: inline-block;
           margin-right: 10px;
-          color:  var(--secundary-color);
+          color:  var(--grey-color);
           
         }
         
@@ -74,24 +74,24 @@
           background-color:  var(--secundary-color);
   }
   .route{
-    color:  var(--secundary-color);
+    color:  var(--grey-color);
     font-size: 1.3rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     &:hover {
-      color: var(--blueSoft-color);
+      color: var(--grey-color);
       // text-shadow: 0.5px 0.5px 0.5px var(--blueSoft-color);
       cursor: pointer;
   }
   }
   .userName{
-    color:  var(--secundary-color);
-    font-size: 1rem;
+    color:  var(--grey-color);
+    font-size: 1.2rem;
     &:hover {
-      color: var(--blueSoft-color);
-      text-shadow: 0.5px 0.5px 1px var(--secundary-color);
+      color: var(--primarySoft-color);
+      // text-shadow: 0.5px 0.5px 0.5px var(--grey-color);
       // font-weight: bold;
       cursor: pointer;
   }

@@ -104,7 +104,7 @@ if (response?.status == 200) {
     //   // Manejar el error
     // }
   };
-console.log("todos los paises", countries);
+// console.log("todos los paises", countries);
 
   return (
     <div className="user-profile-container">

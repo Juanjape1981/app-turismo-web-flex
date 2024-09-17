@@ -13,6 +13,7 @@ export interface Promotion {
   description: string;
   discount_percentage: number;
   available_quantity: number;
+  consumed_quantity: number;
   start_date: string;
   expiration_date: string;
   branch_id: number;

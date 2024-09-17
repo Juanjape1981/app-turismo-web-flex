@@ -9,6 +9,7 @@ import logo from "../assets/logo.png";
 import logo2 from "../assets/logo2.png";
 import { useState } from "react";
 import Loader from "../components/Loader/Loader";
+import User from "../models/User";
 
 const Login = () => {
   const {
@@ -34,22 +35,41 @@ const Login = () => {
     },
   });
 
-  const onSubmit = (data: any) => {
+  const onSubmit = async (data: any) => {
     const formattedData = {
       ...data,
       email: data.email.trim().toLowerCase(),
     };
+  
     setLoading(true);
-    dispatch(userLogIn(formattedData, "")).then((resp) => {
+  
+    try {
+      const resp: Error | { payload: User; type: "user/loginUser"; } | undefined = await dispatch(userLogIn(formattedData, ""));
+
       setLoading(false);
-        
-      if (resp) {
-        Cookies.set("data", JSON.stringify(resp?.payload.token), { expires: 3 });
+      console.log("respuesta del dispatch. tiene payload?",resp);
+      
+      if (resp && "payload" in resp){
+        Cookies.set("data",resp?.payload?.token, { expires: 3 });
         Toast.fire({
           icon: "success",
           title: `Bienvenido ${data.email}`,
         }).then(() => {
           navigate("/");
+        });
+      } else {
+        throw resp;
+      }
+    } catch (error: any) {
+      setLoading(false);
+  
+      if (error.message === "Usuario no autorizado") {
+        Swal.fire({
+          icon: "error",
+          title: "Acceso denegado",
+          text: "Usuario no autorizado para acceder a esta aplicación.",
+          width: "32rem",
+          padding: "0.5rem",
         });
       } else {
         Swal.fire({
@@ -62,9 +82,9 @@ const Login = () => {
           location.href = "/login";
         });
       }
-    });
+    }
   };
-
+  
   return (
     <div className="login-container">
       {loading && <Loader />}

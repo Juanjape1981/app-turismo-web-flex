@@ -1,0 +1,56 @@
+  .tourist-point-detail {
+    min-height: 100vh;
+    padding-top: 5%;
+    .detail-card {
+      padding: 16px;
+      margin: auto;
+      max-width: 600px;
+  
+      .detail-image {
+        width: 100%;
+        height: auto;
+        margin-bottom: 16px;
+      }
+  
+      .buttons-container {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 16px;
+        .btnEdit{
+            color: var(--primary-color);
+            border: solid 0.2px var(--primary-color);
+            padding: 5px 15px;
+            &:hover{
+                color:#fff;
+                background-color:  var(--blueSoft-color);
+            }
+        }
+        .btnDelete{
+            color: #af2432;
+            border: solid 0.2px #af2432;;
+            padding: 5px 15px;
+            &:hover{
+                color:#fff;
+                background-color:  #af2432;;
+            }
+        }
+      }
+    }
+  }
+  .thumbnails-container {
+    display: flex;
+    gap: 10px;
+
+    .thumbnail {
+      width: 80px;
+      height: 60px;
+      object-fit: cover;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: border-color 0.3s ease;
+
+      &:hover {
+        border-color: var(--primary-color);
+      }
+    }
+  }

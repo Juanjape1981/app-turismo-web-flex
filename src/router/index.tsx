@@ -85,7 +85,7 @@ export const routes: RouteProps[] = [
         name: "UserProfile",
         layout: lazy(async () => await import("../pages/Layout/layout")),
         authorization: {
-            allowedRoles:['admin', 'tourist', 'associated']
+            allowedRoles: ['admin']
         }
     },
     {
@@ -94,7 +94,7 @@ export const routes: RouteProps[] = [
         name: "Panel",
         layout: lazy(async () => await import("../pages/Layout/layout")),
         authorization: {
-            allowedRoles: ['admin', 'tourist', 'associated']
+            allowedRoles: ['admin']
         }
     },
     {
@@ -103,16 +103,25 @@ export const routes: RouteProps[] = [
         name: "Panel",
         layout: lazy(async () => await import("../pages/Layout/layout")),
         authorization: {
-            allowedRoles: ['admin', 'tourist', 'associated']
+            allowedRoles: ['admin']
         }
     },
     {
         path: "/puntos_turisticos",
-        element: lazy(async () => await import("../pages/UnderConstruction")),
+        element: lazy(async () => await import("../pages/TouristPointsList")),
         name: "TouristPoints",
         layout: lazy(async () => await import("../pages/Layout/layout")),
         authorization: {
-            allowedRoles: ['admin', 'tourist', 'associated']
+            allowedRoles: ['admin']
+        }
+    },
+    {
+        path: "/tourist-points/:id",
+        element: lazy(async () => await import("../pages/TouristPointDetail")),
+        name: "TouristPoints",
+        layout: lazy(async () => await import("../pages/Layout/layout")),
+        authorization: {
+            allowedRoles: ['admin']
         }
     },
     {
@@ -121,7 +130,7 @@ export const routes: RouteProps[] = [
         name: "Notifications",
         layout: lazy(async () => await import("../pages/Layout/layout")),
         authorization: {
-            allowedRoles: ['admin', 'tourist', 'associated']
+            allowedRoles:['admin']
         }
     },
     {
@@ -130,7 +139,7 @@ export const routes: RouteProps[] = [
         name: "Reports",
         layout: lazy(async () => await import("../pages/Layout/layout")),
         authorization: {
-            allowedRoles: ['admin', 'tourist', 'associated']
+            allowedRoles: ['admin']
         }
     },
     {
@@ -139,7 +148,7 @@ export const routes: RouteProps[] = [
         name: "Reports",
         layout: lazy(async () => await import("../pages/Layout/layout")),
         authorization: {
-            allowedRoles: ['admin', 'tourist', 'associated']
+            allowedRoles: ['associated']
         }
     },
     {
@@ -148,7 +157,7 @@ export const routes: RouteProps[] = [
         name: "Promociones",
         layout: lazy(async () => await import("../pages/Layout/layout")),
         authorization: {
-            allowedRoles: ['admin', 'tourist', 'associated']
+            allowedRoles: ['admin']
         }
     },
     {
@@ -157,7 +166,7 @@ export const routes: RouteProps[] = [
         name: "Sucursales",
         layout: lazy(async () => await import("../pages/Layout/layout")),
         authorization: {
-            allowedRoles: ['admin', 'tourist', 'associated']
+            allowedRoles: ['admin']
         }
     },
     {
@@ -166,7 +175,7 @@ export const routes: RouteProps[] = [
         name: "Crear-Sucursal",
         layout: lazy(async () => await import("../pages/Layout/layout")),
         authorization: {
-            allowedRoles: ['admin', 'tourist', 'associated']
+            allowedRoles: ['admin']
         }
     }
 ];
