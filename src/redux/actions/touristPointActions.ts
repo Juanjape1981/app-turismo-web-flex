@@ -7,7 +7,7 @@ import {
   updateTouristPoint,
   deleteTouristPoint
 } from "../reducers/touristPointsReducer";
-import { TouristPoint } from "../../models/TouristPoint";
+import { TouristPoint, TouristPointCreate } from "../../models/TouristPoint";
 
 
 const URL = import.meta.env.VITE_API_URL;
@@ -37,11 +37,12 @@ const fetchTouristPointById = (touristPointId: number) => {
 };
 
 // Crear un nuevo punto turístico
-const createTouristPoint = (touristPointData: TouristPoint) => {
+const createTouristPoint = (touristPointData: TouristPointCreate) => {
   return async (dispatch: Dispatch) => {
     try {
       const response = await axios.post(`${URL}/tourist_points`, touristPointData);
       dispatch(addTouristPoint(response.data));
+      return response
     } catch (error) {
       console.error("Error al crear un nuevo punto turístico:", error);
     }

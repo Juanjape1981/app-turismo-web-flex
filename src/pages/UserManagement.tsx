@@ -1,20 +1,19 @@
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
 import { RootState } from '../redux/store/store';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import User from '../models/User';
 import { assignRoleToUser, fetchAllUsers, fetchRoles, fetchStatuses, updateUser } from '../redux/actions/userActions';
-import { useAppDispatch } from '../redux/store/hooks';
+import { useAppDispatch, useAppSelector } from '../redux/store/hooks';
 import '../styles/pages/_userManagement.scss';
 import RegisterPartnerModal from '../components/RegisterPartnerModal/RegisterPartnerModal';
 import MarketStall from '../assets/icons/MarketStallwhite.svg';
 import { fetchCategories } from '../redux/actions/globalDataActions';
 
 const UserManagement = () => {
-    const users = useSelector((state: RootState) => state.user.users);
-    const roles = useSelector((state: RootState) => state.user.roles);
-    const statuses = useSelector((state: RootState) => state.user.statuses);
+    const users = useAppSelector((state: RootState) => state.user.users);
+    const roles = useAppSelector((state: RootState) => state.user.roles);
+    const statuses = useAppSelector((state: RootState) => state.user.statuses);
     const dispatch = useAppDispatch();
     const MySwal = withReactContent(Swal);
     console.log("todos los users", users);
@@ -26,7 +25,7 @@ const UserManagement = () => {
     const [roleFilter, setRoleFilter] = useState('');
     const [statusFilter, setStatusFilter] = useState('');
     const [countryFilter, setCountryFilter] = useState('');
-    const [cityFilter, setCityFilter] = useState('');
+    // const [cityFilter, setCityFilter] = useState('');
     const [isModalOpen, setIsModalOpen] = useState(false);
     // const [loading, setLoading] = useState(true);
     const [currentPage, setCurrentPage] = useState(1);
@@ -161,7 +160,7 @@ const UserManagement = () => {
         setRoleFilter('');
         setStatusFilter('');
         setCountryFilter('');
-        setCityFilter('');
+        // setCityFilter('');
     };
     const indexOfLastUser = currentPage * usersPerPage;
     const indexOfFirstUser = indexOfLastUser - usersPerPage;

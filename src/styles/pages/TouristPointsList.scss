@@ -15,7 +15,7 @@
       background-color: var(--primary-color);
       justify-content: center;
       &:hover{
-        background-color: var(--blueSoft-color);
+        background-color: var(--greenSoft-color);
       }
     }
   
@@ -44,6 +44,15 @@
       margin-top: 20px;
       display: flex;
       justify-content: center;
+      & button{
+        background-color: var(--greenSoft-color);
+        &:hover{
+            background-color: #00a8bf;
+        }
+      }
+      .css-yuzg60-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected{
+        background-color: var(--primary-color);
+      }
     }
 
 }
@@ -77,5 +86,5 @@
 //   --grey-color: #f6f6f6;
 
 
-//   --blueSoft-color: #008ba1;
+//   --greenSoft-color: #008ba1;
 //   --blue-light-color: #64C9ED;

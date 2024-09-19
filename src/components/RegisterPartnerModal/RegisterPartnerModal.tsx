@@ -2,9 +2,8 @@ import { useEffect, useState } from 'react';
 import { assignRoleToUser, createPartnerUser } from '../../redux/actions/userActions';
 import Swal from 'sweetalert2';
 import '../../styles/components/_RegisterPartnerModal.scss';
-import { useAppDispatch } from '../../redux/store/hooks';
+import { useAppDispatch, useAppSelector } from '../../redux/store/hooks';
 import { createPartner } from '../../redux/actions/partnerActions';
-import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/store/store';
 import { fetchAllPromotions } from '../../redux/actions/promotionActions';
 import { fetchCountries } from '../../redux/actions/globalDataActions';
@@ -21,9 +20,9 @@ const RegisterPartnerModal: React.FC<RegisterPartnerModalProps> = ({ isOpen, onC
   const dispatch = useAppDispatch();
 
   // Acceder a los países y categorías desde el estado global
-  const countries = useSelector((state: RootState) => state.globalData.countries);
-  const categories = useSelector((state: RootState) => state.globalData.categories);
-  const roles = useSelector((state: RootState) => state.user.roles);
+  const countries = useAppSelector((state: RootState) => state.globalData.countries);
+  const categories = useAppSelector((state: RootState) => state.globalData.categories);
+  const roles = useAppSelector((state: RootState) => state.user.roles);
   const [loading, setLoading] = useState(false);
   
   
@@ -103,7 +102,7 @@ console.log("categorias",categories);
       const createdUserAction = await dispatch(createPartnerUser(userForm));
       console.log("created user en payload",createdUserAction);
       
-      const rolAssociated = roles?.find(rol=> rol.role_name == "associated")
+      const rolAssociated = roles?.find((rol:any)=> rol.role_name == "associated")
       console.log("rol buscado",rolAssociated);
       if (createdUserAction && rolAssociated) {
         const data = {

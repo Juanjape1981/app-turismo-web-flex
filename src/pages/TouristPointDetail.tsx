@@ -1,20 +1,20 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
 import { Button, Typography, Card, Container, Grid } from '@mui/material';
 import { Rating } from '@mui/material';
 import { FaEdit, FaTrashAlt } from 'react-icons/fa';
 import { deleteTouristPointById, fetchTouristPointById } from '../redux/actions/touristPointActions';
-import { AppDispatch, RootState } from '../redux/store/store';
+import { RootState } from '../redux/store/store';
 import '../styles/pages/TouristPointDetail.scss';
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
+import { useAppDispatch, useAppSelector } from '../redux/store/hooks';
 
 const TouristPointDetail = () => {
     const ApiKeyGoogleMaps = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
   const { id } = useParams();
   const navigate = useNavigate();
-  const dispatch = useDispatch<AppDispatch>();
-  const touristPoint = useSelector((state: RootState) => state.touristPoints.selectedTouristPoint);
+  const dispatch = useAppDispatch();
+  const touristPoint = useAppSelector((state: RootState) => state.touristPoints.selectedTouristPoint);
   const [selectedImage, setSelectedImage] = useState<string | undefined>(touristPoint?.images[0]?.image_path);
 console.log("punto turistico seleccionado", touristPoint);
 

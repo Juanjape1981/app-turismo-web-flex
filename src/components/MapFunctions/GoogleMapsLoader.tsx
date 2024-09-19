@@ -1,22 +1,23 @@
 import React, { createContext, ReactNode, useContext, useEffect, useMemo } from 'react';
 import { useJsApiLoader } from '@react-google-maps/api';
-import '../../styles/components/GoogleMapsStyles.scss'
-// Define el contexto para almacenar la configuración de Google Maps
+import '../../styles/components/GoogleMapsStyles.scss';
+
+const GOOGLE_MAPS_LIBRARIES: Array<'places' | 'geometry' | 'marker' | 'drawing' | 'visualization'> = ['places', 'marker'];
+
+
 const GoogleMapsContext = createContext<any>(null);
 
 interface GoogleMapsProviderProps {
   children: ReactNode;
 }
 
-// Define las librerías fuera del componente para evitar la recreación del array
-
 const GoogleMapsProvider: React.FC<GoogleMapsProviderProps> = ({ children }) => {
-  const ApiKeyGoogleMaps = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
+  const ApiKeyGoogleMaps = import.meta.env.VITE_API_GOOGLE_MAPS_KEY;
 
   const { isLoaded, loadError } = useJsApiLoader({
     id: 'google-map-script',
     googleMapsApiKey: ApiKeyGoogleMaps,
-    libraries: ['places', 'marker'], // Usa la constante `libraries`
+    libraries: GOOGLE_MAPS_LIBRARIES,
     version: 'weekly'
   });
 
@@ -24,9 +25,7 @@ const GoogleMapsProvider: React.FC<GoogleMapsProviderProps> = ({ children }) => 
 
   useEffect(() => {
     if (isLoaded) {
-    //   const advancedMarker = new google.maps.marker.AdvancedMarkerElement({
-    //     // Configuración del marcador avanzado
-    //   });
+      // Código relacionado con la API de Google Maps
     }
   }, [isLoaded]);
 
@@ -43,7 +42,6 @@ const GoogleMapsProvider: React.FC<GoogleMapsProviderProps> = ({ children }) => 
   );
 };
 
-// Hook personalizado para acceder al contexto de Google Maps
 const useGoogleMaps = () => {
   const context = useContext(GoogleMapsContext);
   if (!context) {

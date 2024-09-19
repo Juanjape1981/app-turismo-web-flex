@@ -38,7 +38,7 @@
             transition: border-color 0.3s ease;
 
             &:focus {
-                border-color: var(--blueSoft-color);
+                border-color: var(--greenSoft-color);
                 outline: none;
             }
 
@@ -100,7 +100,7 @@
             transition: background-color 0.3s ease;
 
             &:hover {
-                color: var(--blueSoft-color);
+                color: var(--greenSoft-color);
             }
         }
 
@@ -130,7 +130,7 @@
     cursor: pointer;
 
     &:hover {
-        background-color: var(--blueSoft-color);
+        background-color: var(--greenSoft-color);
     }
 }
 

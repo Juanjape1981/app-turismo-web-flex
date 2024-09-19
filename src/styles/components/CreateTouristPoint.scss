@@ -1,0 +1,188 @@
+.create-tourist-point {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    min-height: 100vh;
+  }
+  
+  h1 {
+    font-size: 1.2rem;
+    color: #015d6b;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .form-map-container {
+    width: 98%;
+    display: flex;
+    gap: 20px;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+  
+    .form-container {
+        width: 45%;
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        width: 100%;
+        label {
+          font-size: 1rem;
+          color: #555;
+          margin-bottom: 8px;
+        }
+  
+        input,
+        textarea {
+            width: 100%;
+          padding: 12px;
+          border: 1px solid #ddd;
+          border-radius: 4px;
+          font-size: 1rem;
+          transition: border-color 0.3s ease;
+  
+          &:focus {
+            border-color: var(--greenSoft-color);
+            outline: none;
+          }
+        }
+  
+        textarea {
+          resize: vertical;
+          min-height: 100px;
+          width: 100%;
+        }
+  
+        input::placeholder {
+          color: #aaa;
+        }
+  
+        button {
+          padding: 12px 20px;
+          border: none;
+          border-radius: 4px;
+          background-color: var(--primary-color);
+          color: #fff;
+          font-size: 1rem;
+          cursor: pointer;
+          transition: background-color 0.3s ease;
+          &:hover {
+            background-color: var(--greenSoft-color);
+          }
+          &:disabled {
+            background-color: #aaa;
+            cursor: not-allowed;
+          }
+        }
+      }
+    }
+    .map-container-text{
+        width: 45%;
+        & h4{
+            font-size: 0.9rem;
+            color: #015d6b;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+    }
+    .map-container {
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      overflow: hidden;
+      height: 400px;
+      width: 100%;
+    }
+    .coordinates{
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+        font-size: 1rem;
+        color: var(--primary-color);
+
+    }
+  }
+  .images-container {
+    width: 100%;
+    margin-top: 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  
+    .upload-icon {
+        cursor: pointer;
+        display: flex;
+        margin-right: 1%;
+        margin-left: 2%;
+        width: 100px;
+        height: 80px;
+        align-items: center;
+        justify-content: center;
+        
+        & img{
+            width: 50px;
+            height: 50px;
+        }
+
+    }
+  
+    .image-previews {
+        width: 88%;
+        height: 120px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      .imagesLoad {
+        width: 100px; 
+        height: 80px;
+      }
+    }
+  }
+  .uploadtext{
+    font-size: 1rem;
+    color: var(--greenSoft-color);
+  }
+  @media (max-width: 768px) {
+    .form-map-container {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        justify-content: end;
+        align-items: flex-end;
+        .form-container {
+            width: 90%;
+        }
+      .map-container {
+        width: 90%;
+        height: 300px; 
+      }
+    }
+  }
+  .image-preview-container{
+    overflow: hidden;
+    width:100px;
+            height: 80px;
+        position: relative;
+        border-radius: 10px;
+        .remove-image-button{
+            position: absolute;
+            top: 0;
+            right: 0;
+            width:100px;
+            height: 80px;
+            background-color: #c5c5c5cd;
+            display: none;
+            z-index: 1;
+            transition: all 3s;
+        }
+        &:hover{
+            .remove-image-button{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+               }
+
+  }

@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { Button, Card, Typography, Grid, Pagination } from '@mui/material';
 import { Rating } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { fetchAllTouristPoints } from '../redux/actions/touristPointActions';
 import '../styles/pages/TouristPointsList.scss';
 import { TouristPoint } from '../models/TouristPoint';
-import { AppDispatch, RootState } from '../redux/store/store';
+import { RootState } from '../redux/store/store';
+import { useAppDispatch, useAppSelector } from '../redux/store/hooks';
 
 const TouristPointsList = () => {
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const touristPoints = useSelector((state: RootState) => state.touristPoints.allTouristPoints);
+  const touristPoints = useAppSelector((state: RootState) => state.touristPoints.allTouristPoints);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
 console.log("todos los puntos turisticos",touristPoints);
@@ -20,7 +20,7 @@ console.log("todos los puntos turisticos",touristPoints);
     dispatch(fetchAllTouristPoints());
   }, [dispatch]);
 
-  const handlePageChange = (event: React.ChangeEvent<unknown>, page: number) => {
+  const handlePageChange = ( page: number) => {
     setCurrentPage(page);
   };
 
@@ -33,7 +33,7 @@ console.log("todos los puntos turisticos",touristPoints);
   return (
     <div className="tourist-points-list">
       <div className="button-container">
-        <Button variant="contained" className="add-button">
+        <Button variant="contained" className="add-button"onClick={() => navigate('/create-tourist-point')}>
           Crear Punto Turístico
         </Button>
       </div>
@@ -60,7 +60,7 @@ console.log("todos los puntos turisticos",touristPoints);
         <Pagination
           count={Math.ceil(touristPoints.length / itemsPerPage)}
           page={currentPage}
-          onChange={handlePageChange}
+          onChange={(_, page) => handlePageChange(page)}
           className="pagination"
         />
       )}

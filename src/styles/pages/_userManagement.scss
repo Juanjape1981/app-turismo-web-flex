@@ -52,7 +52,7 @@
         margin-top: 10px;
 
         &:hover {
-            background-color: var(--blueSoft-color);
+            background-color: var(--greenSoft-color);
         }
     }
 
@@ -216,7 +216,7 @@
     border-radius: 10px;
     margin-bottom: 20px;
     &:hover {
-        background-color: var(--blueSoft-color);
+        background-color: var(--greenSoft-color);
     }
     @media (max-width: 768px) {
         background-color: var(--primary-color);
@@ -281,5 +281,5 @@
 }
 
 .pagination button:hover:not(.active) {
-    background-color: var(--blueSoft-color);
+    background-color: var(--greenSoft-color);
 }

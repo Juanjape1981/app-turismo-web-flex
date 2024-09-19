@@ -125,6 +125,15 @@ export const routes: RouteProps[] = [
         }
     },
     {
+        path: "/create-tourist-point",
+        element: lazy(async () => await import("../components/FormTouristPoint/CreateTouristPoint ")),
+        name: "CreateTouristPoints",
+        layout: lazy(async () => await import("../pages/Layout/layout")),
+        authorization: {
+            allowedRoles: ['admin']
+        }
+    },
+    {
         path: "/notificaciones",
         element: lazy(async () => await import("../pages/UnderConstruction")),
         name: "Notifications",

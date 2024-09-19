@@ -1,11 +1,11 @@
-import { useSelector } from 'react-redux';
 import { RootState } from '../redux/store/store';
 // import PartnerDetail from './PartnerDetail';
 import '../styles/pages/Dashboard.scss'
+import { useAppSelector } from '../redux/store/hooks';
 
 const Dashboard = () => {
 
-    const user = useSelector((state: RootState) => state.user.userData);
+    const user = useAppSelector((state: RootState) => state.user.userData);
     
     const renderContent = () => {
         // if (user?.role === 'partner') {

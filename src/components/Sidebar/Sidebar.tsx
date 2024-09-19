@@ -150,12 +150,14 @@ const Sidebar: React.FC = () => {
 
       </div>
       <div className={`politicas ${isSidebarOpen ? 'open' : ''}`}>
+          <span className={`sidebar-textVersion ${isSidebarOpen ? 'open' : ''}`}>Version 0.1.2</span>
+          <span className={`sidebar-textVersion ${isSidebarOpen ? 'open' : ''}`}>Fecha 17/09/2024</span>
 
         <h3>Políticas y Términos</h3>
         <ul>
-          <li><a className='pyc' href="/politica-de-privacidad">Política de Privacidad</a></li>
-          <li><a className='pyc' href="/terminos-y-condiciones">Términos y Condiciones</a></li>
-          <li><a className='pyc' href="/politica-de-cookies">Política de Cookies</a></li>
+          <li><a className='pyc' href="https://sites.google.com/view/cobquecurapp/home">Política de Privacidad</a></li>
+          <li><a className='pyc' href="https://sites.google.com/view/cobquecurapp/home">Términos y Condiciones</a></li>
+          <li><a className='pyc' href="https://sites.google.com/view/cobquecurapp/home">Política de Cookies</a></li>
         </ul>
       </div>
     </div>

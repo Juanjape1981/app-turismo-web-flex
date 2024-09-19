@@ -10,6 +10,7 @@ import logo2 from "../assets/logo2.png";
 import { useState } from "react";
 import Loader from "../components/Loader/Loader";
 import User from "../models/User";
+// import fondo from '../assets/images/fondoondas.svg'
 
 const Login = () => {
   const {
@@ -84,6 +85,9 @@ const Login = () => {
       }
     }
   };
+  const handleCancel = () => {
+    navigate("/");
+  };
   
   return (
     <div className="login-container">
@@ -131,8 +135,10 @@ const Login = () => {
                 <span className="form-error"> {(errors.password as FieldError).message}</span>
               )}
               <button type="submit" className="submit_button">Ingresar</button>
+              <button type="button" className="cancel-buttonLog" onClick={handleCancel}>Cancelar</button>
               {/* <Link to="/register" className="create-account-button">Crear cuenta</Link> */}
             </form>
+      {/* <img src={fondo} alt="" className="fondoOlas"/> */}
           </div>
         </div>
       </div>

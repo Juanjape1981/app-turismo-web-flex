@@ -99,7 +99,7 @@
     
 .form-input:focus {
       outline: none;
-      border-color: var(--blueSoft-color);
+      border-color: var(--greenSoft-color);
     }
   
 .submit_button {
@@ -107,18 +107,33 @@
       min-width: 200px;
       padding: 10px;
       border: none;
-      background-color: var(--secundary-color);
+      background-color: var(--primary-color);
       color: white;
       border-radius: 5px;
       margin-bottom: 10px;
       font-size: 13px;
 
      &:hover {
-      background-color: var(--blueSoft-color);
+      background-color: var(--greenSoft-color);
       cursor: pointer;
     } 
     }
-    
+.cancel-buttonLog{
+  width: 250px;
+  min-width: 200px;
+  padding: 10px;
+  border: none;
+  background-color: #727272;
+  color: white;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  font-size: 13px;
+
+ &:hover {
+  background-color: #999;
+  cursor: pointer;
+} 
+}
 
     
 .forgot-password-button {
@@ -156,4 +171,7 @@
       margin-bottom: 1rem; 
     }
     
-   
+   .fondoOlas{
+    position: absolute;
+    bottom: 0;
+   }

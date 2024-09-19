@@ -83,7 +83,7 @@
   .submit-button {
     padding: 0.75rem;
     border: none;
-    background-color: var(--secundary-color);
+    background-color: var(--primary-color);
     color: #fff;
     cursor: pointer;
     border-radius: 4px;
@@ -91,9 +91,24 @@
     width: 30%;
     &:hover{
       // color: var(--primary-color);
-      background-color: var(--blueSoft-color);
+      background-color: var(--greenSoft-color);
     }
     &:disabled {
+      background-color: var(--primarySoft-color);
+      cursor: auto;
+    }
+  }
+  .cancel-button {
+    margin-top: 10px;
+    padding: 0.75rem;
+    border: none;
+    background-color: #727272;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 4px;
+    grid-column: span 2;
+    width: 30%;
+    &:hover{
       background-color: #999;
     }
   }

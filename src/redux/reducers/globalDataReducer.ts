@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export interface GlobalDataState {
-  categories: any[]; // Cambia el tipo `any` a tu tipo específico si tienes uno
-  countries: any[];  // Cambia el tipo `any` a tu tipo específico si tienes uno
+  categories: any[]; 
+  countries: any[]; 
 }
 
  const initialState: GlobalDataState = {
