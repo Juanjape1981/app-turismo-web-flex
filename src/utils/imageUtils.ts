@@ -26,7 +26,7 @@ export const compressAndConvertToBase64 = async (file: File): Promise<string> =>
     }
 };
 
-export const compressAndConvertMultipleToBase64 = async (files: FileList): Promise<string[]> => {
-    const compressedImagesPromises = Array.from(files).map(file => compressAndConvertToBase64(file));
+export const compressAndConvertMultipleToBase64 = async (files: File[]): Promise<string[]> => {
+    const compressedImagesPromises = files.map(file => compressAndConvertToBase64(file));
     return await Promise.all(compressedImagesPromises);
 };

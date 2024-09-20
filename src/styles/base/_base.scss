@@ -1,7 +1,8 @@
 html, body {
   font-family: var(--font-poppins);
   height: 100%;
-  // background-image: url("../../assets/images/fodoBody.png");
+  width: 100%;
+  
 }
 
 // h1 {
@@ -25,4 +26,11 @@ html, body {
 .swal2-cancel.swal2-styled{
   background-color: var(--primary-color);
   
+}
+
+input:focus-visible{
+  outline-color:var(--primarySoft-color);
+}
+select:focus-visible{
+  outline-color:var(--primarySoft-color);
 }

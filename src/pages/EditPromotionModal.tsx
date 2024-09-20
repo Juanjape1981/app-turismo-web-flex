@@ -108,15 +108,6 @@ const EditPromotionModal: React.FC<EditPromotionModalProps> = ({ idPromo, isOpen
             onClose();
         }
     };
-
-    // const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    //     if (e.target.files) {
-    //         const files = Array.from(e.target.files);
-    //         const images = files.map(file => URL.createObjectURL(file));
-    //         setImagePaths(images);
-    //     }
-    // };
-
     const handleCategoryChange = (categoryId: number) => {
         setCategoryIds(prevIds =>
             prevIds.includes(categoryId)

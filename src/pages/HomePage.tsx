@@ -58,8 +58,8 @@ const HomePage = () => {
         </p>
       </section>
       <div className='divLogoHome'>
-                    <img src={logo} alt="LogoH" />
-                    <img src={logo2} alt="Logo2H" />
+                    <img src={logo} className='LogoH' alt="LogoH" />
+                    <img src={logo2} className='Logo2H' alt="Logo2H" />
             </div>
 
       {/* <section>

@@ -8,6 +8,7 @@ import { useAppDispatch } from '../../redux/store/hooks';
 import { createTouristPoint } from '../../redux/actions/touristPointActions';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
+import Loader from '../Loader/Loader';
 
 const CreateTouristPointForm = () => {
     const navigate = useNavigate();
@@ -20,6 +21,8 @@ const CreateTouristPointForm = () => {
   const [location, setLocation] = useState({ lat: 0, lng: 0 });
   const [previewImages, setPreviewImages] = useState<string[]>([]);
   const [imagesData, setImagesData] = useState<{ filename: string, data: string }[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+                                        
 
 console.log("ubicacion en el formulario",location);
   const Toast = Swal.mixin({
@@ -73,7 +76,7 @@ console.log("ubicacion en el formulario",location);
 
   const handleSubmit = async(e: React.FormEvent) => {
     e.preventDefault();
-
+    setIsLoading(true)
     const newTouristPoint = {
       ...formData,
       latitude: location.lat,
@@ -88,7 +91,7 @@ console.log("ubicacion en el formulario",location);
             icon: 'success',
             title: 'Punto Turístico creado exitosamente!',
           });
-          navigate('/puntos_turisticos');
+          navigate('/tourist-points');
         } else {
           throw new Error('Error en la creación del punto turístico');
         }
@@ -97,10 +100,17 @@ console.log("ubicacion en el formulario",location);
           icon: 'error',
           title: 'Hubo un error al crear el punto turístico.',
         });
+      }finally{
+        setIsLoading(false)
       }
+
   };
+  const handleCancel = () =>{
+    navigate('/tourist-points');
+  }
   const isSubmitDisabled = !formData.title || !formData.location || location.lat === 0 || location.lng === 0;
   return (
+    <>   {isLoading && <Loader/>}
     <div className='create-tourist-point'>
       <h1>Crear Punto Turístico</h1>
       <div className="form-map-container">
@@ -135,14 +145,18 @@ console.log("ubicacion en el formulario",location);
         <p><strong>Latitud:</strong> {location.lat}</p>
         <p><strong>Longitud:</strong> {location.lng}</p>
       </div>
-            <button type="submit" disabled={isSubmitDisabled}>Crear Punto Turístico</button>
+      <div className='contBtns'>
+            <button type="submit" disabled={isSubmitDisabled}>Crear</button>
+            <button className='cancelbtn' onClick={handleCancel}>Cancelar</button>
+      </div>
+            
           </form>
         </div>
         <div className="map-container-text">
             <h4>Hacer click en el mapa o arrastrar el marcador hasta la ubicación correspondiente.</h4>
         <div className="map-container">
           <GoogleMapsProvider>
-            <MapComponent onLocationChange={handleLocationChange} />
+            <MapComponent onLocationChange={handleLocationChange} center={undefined} markerPosition={undefined} zoom={undefined} editMode={true} />
           </GoogleMapsProvider>
         </div>
         </div>
@@ -176,6 +190,7 @@ console.log("ubicacion en el formulario",location);
         </div>
       </div>
     </div>
+    </> 
   );
 };
 

@@ -1,6 +1,6 @@
 .user-management {
     min-height: 100vh;
-    width: 90%; // Ajusta el ancho para pantallas más pequeñas
+    width: 90%;
     margin: 0 auto;
     padding: 20px;
     background-color: #ffffff;
@@ -8,7 +8,12 @@
     font-family: 'Arial', sans-serif;
 
     @media (max-width: 768px) {
-        width: 95%; // Ajusta el ancho para pantallas pequeñas
+        width: 95%;
+        height: 100%;
+        padding: 0%;
+        padding-left: 8%;
+        padding-top: 5%;
+        padding-bottom: 5%;
     }
 
     & .filters {
@@ -39,20 +44,22 @@
 
     & .btnFilter {
         cursor: pointer;
-        width: 100%; // Ocupa el 100% del ancho en pantallas pequeñas
-        max-width: 150px; // Limita el ancho máximo en pantallas grandes
-        background-color: var(--secundary-color);
+        width: 100%;
+        max-width: 150px;
+        border: 1.2px solid var(--primary-color);
         display: flex;
         justify-content: center;
         align-items: center;
         height: 2.5rem;
-        color: #ffffff;
-        box-shadow: 0px 4px 2px -3px rgba(0,0,0,0.75);
+        font-weight: 700;
+        color: var(--primary-color);
+        box-shadow: 1px 3px 2px -4px rgba(0,0,0,0.75);
         border-radius: 10px;
         margin-top: 10px;
 
         &:hover {
             background-color: var(--greenSoft-color);
+            color: #fff;
         }
     }
 
@@ -206,7 +213,7 @@
     cursor: pointer;
     width: 100%; // Ocupa el 100% del ancho en pantallas pequeñas
     max-width: 200px; // Limita el ancho máximo en pantallas grandes
-    background-color: var(--secundary-color);
+    background-color: var(--primary-color);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -236,8 +243,15 @@
         display: flex;
     }
 }
+.user-table-wrapper {
+    width: 100%;
+    overflow-x: auto; /* Permite el scroll horizontal en pantallas pequeñas */
+    -webkit-overflow-scrolling: touch; /* Hace el scroll suave en dispositivos iOS */
+}
+
 .user-table {
     width: 100%;
+    min-width: 600px;
     border-collapse: collapse;
     margin-bottom: 20px;
 }
@@ -246,6 +260,9 @@
     padding: 12px 15px;
     border: 1px solid #ddd;
     text-align: left;
+    @media (max-width: 768px) {
+        padding: 7px 10px;
+    }
 }
 
 .user-table th {
@@ -257,7 +274,6 @@
     background-color: #f1f1f1;
     cursor: pointer;
 }
-
 .pagination {
     display: flex;
     justify-content: center;
@@ -277,7 +293,7 @@
 }
 
 .pagination button.active {
-    background-color: #336749;
+    background-color: var(--primary-color-active);
 }
 
 .pagination button:hover:not(.active) {

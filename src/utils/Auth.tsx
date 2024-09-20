@@ -12,7 +12,7 @@ interface AuthGuardProps {
 const AuthGuard: React.FC<AuthGuardProps> = ({ children, allowedRoles }) => {
   const { userData, accessToken } = useAppSelector((state: RootState) => state.user);
 
-console.log("data del usuario",userData,"token de acceso",accessToken);
+// console.log("data del usuario",userData,"token de acceso",accessToken);
 
 
   if (!accessToken) {

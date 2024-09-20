@@ -1,5 +1,6 @@
 .navbar {
-    background: linear-gradient(45deg, var(--primary-color), var(--primarySoft-color));
+    // background: linear-gradient(45deg, var(--primary-color), var(--primarySoft-color));
+    background-color: var(--primary-color);
     width: 100%;
     display: flex;
     box-shadow: 2px 1px 1px 0px var(--primary-color);
@@ -57,7 +58,8 @@
           }
           @media (max-width: 500px) {
             width: 40%;
-            flex-direction: column-reverse;
+            display: flex;
+            flex-direction: row;
             justify-content: space-around;
           }
           

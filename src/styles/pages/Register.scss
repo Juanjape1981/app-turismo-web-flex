@@ -40,7 +40,10 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 0.5rem;
-
+    @media (max-width: 500px) {
+      display: flex;
+      flex-direction: column;
+    }
     .form-input {
       width: 100%;
       padding: 0.75rem;
@@ -54,6 +57,9 @@
     flex-direction: column;
     margin-top: 0.5rem;
     width: 30%;
+    @media (max-width: 500px) {
+      width: 90%;
+    }
     .form-input {
       width: 100%;
       margin-bottom: 1rem;
@@ -97,6 +103,9 @@
       background-color: var(--primarySoft-color);
       cursor: auto;
     }
+    @media (max-width: 500px) {
+      width: 90%;
+    }
   }
   .cancel-button {
     margin-top: 10px;
@@ -110,6 +119,9 @@
     width: 30%;
     &:hover{
       background-color: #999;
+    }
+    @media (max-width: 500px) {
+      width: 90%;
     }
   }
 

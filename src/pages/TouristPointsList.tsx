@@ -11,7 +11,7 @@ import { useAppDispatch, useAppSelector } from '../redux/store/hooks';
 const TouristPointsList = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const touristPoints = useAppSelector((state: RootState) => state.touristPoints.allTouristPoints);
+  const touristPoints = useAppSelector((state: RootState) => state.touristPoints.allTouristPoints).filter(touristPoint => { return touristPoint.status.name === 'active'});;
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
 console.log("todos los puntos turisticos",touristPoints);

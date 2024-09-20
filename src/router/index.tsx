@@ -11,7 +11,7 @@ interface RouteProps {
     name?: string;
     authorization?: {
         allowedRoles: string[]
-      } | null;
+    } | null;
 }
 
 export const renderRoutes = (routes: RouteProps[]) => {
@@ -98,7 +98,7 @@ export const routes: RouteProps[] = [
         }
     },
     {
-        path: "/gestion-usuarios",
+        path: "/users-management",
         element: lazy(async () => await import("../pages/UserManagement")),
         name: "Panel",
         layout: lazy(async () => await import("../pages/Layout/layout")),
@@ -107,7 +107,7 @@ export const routes: RouteProps[] = [
         }
     },
     {
-        path: "/puntos_turisticos",
+        path: "/tourist-points",
         element: lazy(async () => await import("../pages/TouristPointsList")),
         name: "TouristPoints",
         layout: lazy(async () => await import("../pages/Layout/layout")),
@@ -134,16 +134,16 @@ export const routes: RouteProps[] = [
         }
     },
     {
-        path: "/notificaciones",
+        path: "/notifications",
         element: lazy(async () => await import("../pages/UnderConstruction")),
         name: "Notifications",
         layout: lazy(async () => await import("../pages/Layout/layout")),
         authorization: {
-            allowedRoles:['admin']
+            allowedRoles: ['admin']
         }
     },
     {
-        path: "/reportes",
+        path: "/reports",
         element: lazy(async () => await import("../pages/UnderConstruction")),
         name: "Reports",
         layout: lazy(async () => await import("../pages/Layout/layout")),
@@ -161,7 +161,7 @@ export const routes: RouteProps[] = [
         }
     },
     {
-        path: "/promociones",
+        path: "/promotions",
         element: lazy(async () => await import("../pages/AllPromotions")),
         name: "Promociones",
         layout: lazy(async () => await import("../pages/Layout/layout")),

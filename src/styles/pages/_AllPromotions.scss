@@ -5,6 +5,7 @@
     background-color: #f9f9f9;
     // border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-image: url(../../assets/images/fondo-poli.svg);
 
     h2 {
         text-align: center;
@@ -98,9 +99,9 @@
             cursor: pointer;
             margin-right: 10px;
             transition: background-color 0.3s ease;
-
+            color: var(--primary-color);
             &:hover {
-                color: var(--greenSoft-color);
+                color: var(--primary-color-active);
             }
         }
 
@@ -118,19 +119,26 @@
 
 .clearBtn {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
     align-self: flex-start;
     align-items: center;
     width: 180px;
     padding: 8px 12px;
-    background-color: var(--secundary-color);
+    border: 1.2px solid var(--primary-color);
+    color: var(--primary-color);
+    font-weight: 600;
+    // background-color: var(--primary-color);
     margin-top: 0;
-    color: #f1f1f1;
+    // color: #f1f1f1;
     border-radius: 5px;
     cursor: pointer;
 
     &:hover {
         background-color: var(--greenSoft-color);
+        color: #fff;
+    }
+    @media (max-width: 500px) {
+        width: 80%;
     }
 }
 
@@ -160,7 +168,7 @@
         background-color: var(--primary-color);
         cursor: pointer;
         &:hover {
-            background-color: var(--orangeSoft-color);
+            background-color: var(--greenSoft-color);
         }
         @media (max-width: 480px) {
             width: 150px;
@@ -201,7 +209,8 @@
     }
 
     .clearBtn {
-        width: 100%;
+        width: 50%;
+        align-self: center;
     }
 
     .createPromotion {
@@ -249,8 +258,8 @@
 }
 .table-container {
     width: 100%;
-    overflow-x: auto;  // Permite el scroll horizontal
-    -webkit-overflow-scrolling: touch;  // Suaviza el scroll en dispositivos móviles
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch; 
 
     .promotions-table {
         min-width: 600px;
@@ -262,8 +271,8 @@
     justify-content: center;
     margin: 20px 0;
 
-    button {
-        background-color: #f1f1f1;
+    & button {
+        // background-color: #f1f1f1;
         border: 1px solid #ccc;
         padding: 8px 15px;
         margin: 0 5px;
@@ -279,11 +288,11 @@
         }
         &:hover {
             background-color: #ddd;
-            color: #000;
+            // color: #000;
         }
 
         &.active {
-            background-color: #007A8C;
+            background-color: var(--primary-color-active);
             color: #fff;
             border: none;
             pointer-events: none;

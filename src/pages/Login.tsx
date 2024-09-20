@@ -56,7 +56,7 @@ const Login = () => {
           icon: "success",
           title: `Bienvenido ${data.email}`,
         }).then(() => {
-          navigate("/");
+          navigate("/dashboard");
         });
       } else {
         throw resp;

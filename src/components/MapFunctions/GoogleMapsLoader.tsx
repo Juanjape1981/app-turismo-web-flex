@@ -1,6 +1,7 @@
 import React, { createContext, ReactNode, useContext, useEffect, useMemo } from 'react';
 import { useJsApiLoader } from '@react-google-maps/api';
 import '../../styles/components/GoogleMapsStyles.scss';
+import Loader from '../Loader/Loader';
 
 const GOOGLE_MAPS_LIBRARIES: Array<'places' | 'geometry' | 'marker' | 'drawing' | 'visualization'> = ['places', 'marker'];
 
@@ -37,7 +38,7 @@ const GoogleMapsProvider: React.FC<GoogleMapsProviderProps> = ({ children }) => 
 
   return (
     <GoogleMapsContext.Provider value={value}>
-      {isLoaded ? children : <div>Loading...</div>}
+      {isLoaded ? children : <Loader></Loader>}
     </GoogleMapsContext.Provider>
   );
 };

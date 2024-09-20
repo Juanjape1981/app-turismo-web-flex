@@ -44,28 +44,28 @@ const Sidebar: React.FC = () => {
           name: "Panel General",
           style: "panelicono"
         },
+        // {
+        //   path: "/socioPerfil",
+        //   name: "Perfil de asociado",
+        //   style: "asociados"
+        // },
         {
-          path: "/socioPerfil",
-          name: "Perfil de asociado",
-          style: "asociados"
-        },
-        {
-          path: "/promociones",
+          path: "/promotions",
           name: "Promociones",
           style: "gestion"
         },
         {
-          path: "/gestion-usuarios",
+          path: "/users-management",
           name: "Usuarios",
           style: "usuarios"
         },
         {
-          path: "/puntos_turisticos",
+          path: "/tourist-points",
           name: "Puntos turísticos",
           style: "puntosturisticos"
         },
         {
-          path: "/notificaciones",
+          path: "/notifications",
           name: "Notificaciones",
           style: "notificaciones"
         },
@@ -75,7 +75,7 @@ const Sidebar: React.FC = () => {
           style: "userProfile"
         },
         {
-          path: "/reportes",
+          path: "/reports",
           name: "Reportes",
           style: "reportes"
         },
@@ -127,9 +127,9 @@ const Sidebar: React.FC = () => {
             <li key={index}>
               <div className="sidebar-icon">
                 {route.path !== "/" ?
-                  <Link className="linkSidebar" to={route.path == "/" ? undefined : route.path}>
+                  <Link className={`linkSidebar ${isSidebarOpen ? 'open' : ''}`} to={route.path == "/" ? undefined : route.path}>
                     {route.style == "panelicono" ? <img src={panel} className='iconos' /> : null}
-                    {route.style == "asociados" ? <img src={MarketStall} className='iconos' /> : null}
+                    {/* {route.style == "asociados" ? <img src={MarketStall} className='iconos' /> : null} */}
                     {route.style == "gestion" ? <img src={Discount} className='iconos' /> : null}
                     {route.style == "reportes" ? <img src={Analytics} className='iconos' /> : null}
                     {route.style == "usuarios" ? <img src={users} className='iconos' /> : null}
@@ -138,8 +138,8 @@ const Sidebar: React.FC = () => {
                     {route.style == "faqicono" ? <img src={faq} className='iconos' /> : null}
                     {route.style == "puntosturisticos" ? <img src={touristPoint} className='iconos' /> : null}
                     <span className={`sidebar-text ${isSidebarOpen ? 'open' : ''}`}>{route.name}</span>
-                  </Link> : 
-                  <div className='divSalir'> {route.style == "salir" ? <img src={logoutIcon} className='iconos' />: null}
+                  </Link> :
+                  <div className='divSalir'> {route.style == "salir" ? <img src={logoutIcon} className='iconos' /> : null}
                     <span onClick={logOut} className={`sidebar-text ${isSidebarOpen ? 'open' : ''}`}>{route.name}</span>
                   </div>
                 }
@@ -150,8 +150,8 @@ const Sidebar: React.FC = () => {
 
       </div>
       <div className={`politicas ${isSidebarOpen ? 'open' : ''}`}>
-          <span className={`sidebar-textVersion ${isSidebarOpen ? 'open' : ''}`}>Version 0.1.2</span>
-          <span className={`sidebar-textVersion ${isSidebarOpen ? 'open' : ''}`}>Fecha 17/09/2024</span>
+        <span className={`sidebar-textVersion ${isSidebarOpen ? 'open' : ''}`}>Version 0.1.2</span>
+        <span className={`sidebar-textVersion ${isSidebarOpen ? 'open' : ''}`}>Fecha 17/09/2024</span>
 
         <h3>Políticas y Términos</h3>
         <ul>

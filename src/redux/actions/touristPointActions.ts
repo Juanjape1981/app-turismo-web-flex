@@ -7,7 +7,7 @@ import {
   updateTouristPoint,
   deleteTouristPoint
 } from "../reducers/touristPointsReducer";
-import { TouristPoint, TouristPointCreate } from "../../models/TouristPoint";
+import { TouristPointCreate } from "../../models/TouristPoint";
 
 
 const URL = import.meta.env.VITE_API_URL;
@@ -50,11 +50,19 @@ const createTouristPoint = (touristPointData: TouristPointCreate) => {
 };
 
 // Actualizar un punto turístico existente
-const updateTouristPointById = (touristPointId: number, touristPointData: TouristPoint) => {
+const updateTouristPointById = (touristPointId: string, touristPointData: TouristPointCreate, deletedImages: number[]) => {
   return async (dispatch: Dispatch) => {
     try {
+        // Eliminar las imágenes
+      if (deletedImages.length > 0) {
+        const responseDel = await axios.post(`${URL}/tourist_points/${touristPointId}/images/delete`, { image_ids: deletedImages });
+            console.log("respuesta de la eliminacion de imagenes",responseDel);
+            
+      }
       const response = await axios.put(`${URL}/tourist_points/${touristPointId}`, touristPointData);
+      console.log("respuesta de la actualizacion",response);
       dispatch(updateTouristPoint(response.data));
+      return response
     } catch (error) {
       console.error(`Error al actualizar el punto turístico ${touristPointId}:`, error);
     }

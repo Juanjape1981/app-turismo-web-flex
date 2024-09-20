@@ -15,9 +15,18 @@ const initialRegion = {
   longitudeDelta: 0.02,
 };
 
-const MAP_ID = '172421d420ae781a';
+const MAP_ID = import.meta.env.VITE_API_MAP_ID;
+interface MapComponentProps {
+  center: { lat: number; lng: number }|undefined;
+  zoom: number|undefined;
+  markerPosition: { lat: number; lng: number }|undefined;
+  onLocationChange: (lat: number, lng: number) => void;
+  editMode: boolean;
+}
 
-const MapComponent = ({ onLocationChange }: { onLocationChange: (lat: number, lng: number) => void }) => {
+const MapComponent: React.FC<MapComponentProps> = ({ center, zoom, markerPosition, onLocationChange, editMode  }) => {
+
+// const MapComponent = ({ onLocationChange }: { onLocationChange: (lat: number, lng: number) => void }) => {
   const { isLoaded } = useGoogleMaps();
   const [map, setMap] = useState<google.maps.Map | null>(null);
   const [position, setPosition] = useState({ lat: initialRegion.latitude, lng: initialRegion.longitude });
@@ -27,7 +36,7 @@ const MapComponent = ({ onLocationChange }: { onLocationChange: (lat: number, ln
   useEffect(() => {
     console.log("Posición actualizada:", position);
   
-    if (map && isLoaded) {
+    if (map && isLoaded ) {
       if (advancedMarker) {
         // Eliminar el marcador actual del mapa antes de actualizar su posición
         advancedMarker.map = null;
@@ -42,7 +51,7 @@ const MapComponent = ({ onLocationChange }: { onLocationChange: (lat: number, ln
         const newAdvancedMarker = new google.maps.marker.AdvancedMarkerElement({
           position: new google.maps.LatLng(position.lat, position.lng),
           title: "Ubicación seleccionada",
-          gmpDraggable: true, // Hacer el marcador arrastrable
+          gmpDraggable: editMode,
         });
   
         // Listener para eventos de clic en el marcador
@@ -53,11 +62,12 @@ const MapComponent = ({ onLocationChange }: { onLocationChange: (lat: number, ln
   
         // Listener para eventos de fin de arrastre
         newAdvancedMarker.addListener('dragend', (event: google.maps.MapMouseEvent) => {
-          const lat = event.latLng?.lat();
-          const lng = event.latLng?.lng();
-          if (lat && lng) {
-            setPosition({ lat, lng });
-            onLocationChange(lat, lng);
+          if (editMode) {
+            const lat = event.latLng?.lat();
+            const lng = event.latLng?.lng();
+            if (lat && lng) {
+              onLocationChange(lat, lng);
+            }
           }
         });
   
@@ -66,19 +76,19 @@ const MapComponent = ({ onLocationChange }: { onLocationChange: (lat: number, ln
         setAdvancedMarker(newAdvancedMarker);
       }
     }
-  }, [map, position, advancedMarker, onLocationChange, isLoaded]);
+  }, [map, position, advancedMarker, onLocationChange, isLoaded, editMode]);
   
 
   const onMapClick = useCallback(
     (e: google.maps.MapMouseEvent) => {
-      if (e.latLng) {
+      if (editMode && e.latLng) { 
         const lat = e.latLng.lat();
         const lng = e.latLng.lng();
         setPosition({ lat, lng });
         onLocationChange(lat, lng);
       }
     },
-    [onLocationChange]
+    [editMode, onLocationChange]
   );
 
   const onMapLoad = useCallback((map: google.maps.Map) => {
@@ -95,7 +105,7 @@ const MapComponent = ({ onLocationChange }: { onLocationChange: (lat: number, ln
       <GoogleMap
         mapContainerStyle={containerStyle}
         center={position}
-        zoom={15}
+        zoom={zoom? zoom : 15}
         onLoad={onMapLoad}
         onClick={onMapClick}
       />

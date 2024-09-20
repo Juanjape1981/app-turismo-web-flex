@@ -234,7 +234,7 @@ const UserManagement = () => {
                 <button className='btnFilter' onClick={handleClearFilters}>Limpiar Filtros</button>
             </div>
             {/* <div className='contBtn'><button className='btnFilter' onClick={handleClearFilters}>Limpiar Filtros</button> </div> */}
-            
+            <div className="user-table-wrapper">
             <table className="user-table">
                 <thead>
                     <tr>
@@ -257,6 +257,7 @@ const UserManagement = () => {
                     ))}
                 </tbody>
             </table>
+            </div>
             
             <div className="pagination">
                 {[...Array(Math.ceil(filteredUsers.length / usersPerPage))].map((_, index) => (

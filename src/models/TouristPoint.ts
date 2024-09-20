@@ -1,3 +1,5 @@
+import Status from "../redux/types/types";
+
 export interface TouristPointImages {
     id?: number;
     image_path: string;
@@ -14,6 +16,7 @@ export interface TouristPoint {
     longitude: number;
     images:TouristPointImages[];
     average_rating: number;
+    status: Status
   }
 
   export interface TouristPointCreate {
