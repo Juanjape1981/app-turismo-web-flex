@@ -39,7 +39,7 @@ const CreateBranchPage = () => {
           setLongitude={setLongitude}
           onAddressBlur={handleAddressBlur}
         />
-        <MapComponent onLocationChange={(lat:any, lng:any) => {
+        <MapComponent center={undefined} zoom={undefined} markerPosition={undefined} editMode={true} onLocationChange={(lat:any, lng:any) => {
         setLatitude(lat);
         setLongitude(lng);
       }} />

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import '../../styles/components/_sidebar.scss';
 import { Link } from 'react-router-dom';
-import MarketStall from "../../assets/icons/MarketStall.svg"
+// import MarketStall from "../../assets/icons/MarketStall.svg"
 import panel from "../../assets/icons/Dashboard.svg"
 import Discount from "../../assets/icons/Discount.svg"
 import Analytics from "../../assets/icons/Analytics.svg"
