@@ -22,7 +22,7 @@ const GoogleMapsProvider: React.FC<GoogleMapsProviderProps> = ({ children }) => 
     version: 'weekly'
   });
 
-  console.log(ApiKeyGoogleMaps);
+  // console.log(ApiKeyGoogleMaps);
 
   useEffect(() => {
     if (isLoaded) {
