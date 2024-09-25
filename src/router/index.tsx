@@ -54,6 +54,12 @@ export const routes: RouteProps[] = [
         layout: lazy(async () => await import("../pages/Layout/layout"))
     },
     {
+        path: "/PromotionDetail/:id",
+        element: lazy(async () => await import("../components/RedirectToAppStore/RedirectToAppStore")),
+        name: "Redirect",
+        // layout: lazy(async () => await import("../pages/Layout/layout"))
+    },
+    {
         path: "/login",
         element: lazy(async () => await import("../pages/Login")),
         name: "Login"
