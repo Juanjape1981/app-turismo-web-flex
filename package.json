@@ -1,5 +1,5 @@
 {
-  "name": "app-turismo-web",
+  "name": "app-turismo-web-flex",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -17,7 +17,7 @@
     "@reduxjs/toolkit": "^2.2.6",
     "@types/react-router-dom": "^5.3.3",
     "@vis.gl/react-google-maps": "^1.2.0",
-    "app-turismo-web": "file:",
+    "app-turismo-web-flex": "file:",
     "axios": "^1.7.7",
     "browser-image-compression": "^2.0.2",
     "js-cookie": "^3.0.5",

@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import Loader from '../Loader/Loader';
 
 const RedirectToAppStore = () => {
   useEffect(() => {
@@ -19,7 +20,7 @@ const RedirectToAppStore = () => {
     }
   }, []);
 
-  return <div>Redirigiendo a Play Store...</div>;;
+  return <Loader></Loader>;;
 };
 
 export default RedirectToAppStore;
